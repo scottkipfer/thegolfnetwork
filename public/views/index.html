@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en" data-ng-app="the-network-golf">
+<head>
+    <title>The Network</title>
+    <base href="/"/>
+    <meta charset="utf-8"/>
+    <meta content='width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0' name='viewport'/>
+    <script src="lib/angular/angular.min.js"></script>
+    <script src="lib/angular-bootstrap/ui-bootstrap-tpls.min.js"></script>
+    <script src="lib/angular-local-storage/dist/angular-local-storage.min.js"></script>
+    <script src="lib/angular-ui-router/release/angular-ui-router.min.js"></script>
+    <script src="js/services.js"></script>
+    <script src="js/controllers.js"></script>
+    <script src="js/directives.js"></script>
+    <script src="js/main.js"></script>
+
+    <link href="lib/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href='http://fonts.googleapis.com/css?family=Roboto+Condensed' rel='stylesheet' type='text/css'>
+    <link href="css/app.css" rel="stylesheet">
+</head>
+<body>
+<div class="wrapper">
+        <!-- Tabs -->
+        <div class="tabs">
+        <a ui-sref="golfer-view">golfer view</a>
+        <a ui-sref="golfer-list-view">golfer list view</a>
+        </div>
+    </div>
+    <!-- ngView -->
+    <div data-ui-view class="view"></div>
+
+</body>
+</html>

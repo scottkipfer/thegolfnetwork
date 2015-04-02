@@ -1,0 +1,11 @@
+{
+    "name": "the-network-golf",
+    "version": "0.0.1",
+    "dependencies": {
+        "angular": "latest",
+        "bootstrap": "3.1.1",
+        "angular-bootstrap": "0.10.0",
+        "angular-local-storage": "~0.1.3",
+        "angular-ui-router": "~0.2.11"
+    }
+}

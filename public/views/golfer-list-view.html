@@ -1,0 +1,15 @@
+<div>
+    <p>
+        this is the golfer-list-view.html
+    </p>
+
+    <div class ="row">
+        <div class = "col-xs-3" ng-repeat="golfer in golfers">
+            <div class="well">
+                <h3 class="name">
+                    <a ui-sref="singleGolfer({id:golfer.id, permalink:golfer.permalink})">{{golfer.name.first}} {{golfer.name.last}}</a>
+                </h3>
+            </div>
+        </div>
+    </div>
+</div>
