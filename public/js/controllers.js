@@ -25,5 +25,4 @@ angular.module('network-golf-controllers',[]).controller('golferController', fun
     };
 
     $scope.golfers = $scope.getAllGolfers();
-
 });

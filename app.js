@@ -1,14 +1,21 @@
 // server.js
 
 // modules
+require('dotenv').load();
 var http = require('http');
 var express = require('express');
 var app = express();
+var morgan = require('morgan');
+var favicon = require('serve-favicon');
 
+// Connect to the Database
+require('./server/database/connect');
 // Set the port
-var port = 8080;
+var port = process.env.PORT || 8080;
 // Set the static directory
 app.use(express.static(__dirname + '/public'));
+app.use(morgan("dev"));
+app.use(favicon(__dirname + '/public/img/thenetworkfav.png'));
 
 
 // Api Route to get game data from xboxapi.com
@@ -50,3 +57,4 @@ app.get('*', function (req, res) {
 
 //Launch Server
 app.listen(port);
+console.log("listening on port: " + port);

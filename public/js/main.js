@@ -2,7 +2,9 @@
 'use strict';
 
 var app = angular.module('the-network-golf', [
-    'LocalStorageModule',
+    'angular-storage',
+    'auth0',
+    'angular-jwt',
     'ui.bootstrap',
     'ui.router',
     'network-golf-controllers'
