@@ -9,3 +9,5 @@ process.on('SIGINT', function() {
         process.exit(0);
     });
 });
+
+require('../database/models/user_model.js');
