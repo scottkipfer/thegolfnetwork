@@ -7,11 +7,12 @@ var app = angular.module('the-network-golf', [
     'angular-jwt',
     'ui.bootstrap',
     'ui.router',
-    'network-golf-controllers'
+    'network-golf-controllers',
+    'tng-login'
 ])
     // Configure Routes for the application
     .config(['$stateProvider', '$urlRouterProvider', '$locationProvider', function ($stateProvider, $urlRouterProvider, $locationProvider) {
-        $urlRouterProvider.otherwise("/");
+        $urlRouterProvider.otherwise('/');
         $stateProvider
             .state('golfer-list-view', {
                 url: "/golfer-list",
@@ -19,9 +20,14 @@ var app = angular.module('the-network-golf', [
                 controller: 'golferListController'
             })
             .state('golfer-view',{
-                url:'/golfer-view',
+                url:'/golfer',
                 templateUrl: 'views/golfer-view.html',
-               controller: 'golferController'
+                controller: 'golferController'
+            })
+            .state('login-view',{
+                url:'/signin',
+                templateUrl: 'login/views/login.html',
+                controller: 'loginController'
             });
         // Use Html 5 Mode
         $locationProvider.html5Mode({

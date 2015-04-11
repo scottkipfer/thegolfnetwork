@@ -1,0 +1,22 @@
+<div class="login-wrapper">
+
+    <div class="login-logo">
+        <ng-include src="'login/img/login-logo.svg'"></ng-include>
+    </div>
+
+    <form id="login_form" ng-submit="login()">
+        <div class="input-wrapper">
+            <input required id="email_block" type="email" name="email" placeholder="Email Address" ng-model="user.email">
+            <span class="pic email"></span>
+        </div>
+        <div class="input-wrapper">
+            <input required id="pw_block" type="password" name="password" placeholder="Password" ng-model="user.password">
+            <span class="pic email"></span>
+        </div>
+        <div class="login-button">
+            <button type="submit" class="submit_button btn-default">Sign In</button>
+        </div>
+    </form>
+
+
+</div>

@@ -7,10 +7,11 @@
     <meta content='width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0' name='viewport'/>
     <script src="lib/angular/angular.min.js"></script>
     <script src="lib/angular-bootstrap/ui-bootstrap-tpls.min.js"></script>
-    <script src="/lib/a0-angular-storage/dist/angular-storage.min.js"></script>
+    <script src="lib/a0-angular-storage/dist/angular-storage.min.js"></script>
     <script src="lib/angular-ui-router/release/angular-ui-router.min.js"></script>
     <script src="lib/angular-jwt/dist/angular-jwt.min.js"></script>
     <script src="lib/auth0-angular/build/auth0-angular.min.js"></script>
+    <script src="login/js/tng-login.js"></script>
     <script src="js/services.js"></script>
     <script src="js/controllers.js"></script>
     <script src="js/directives.js"></script>
@@ -19,6 +20,7 @@
     <link href="lib/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet">
     <link href='http://fonts.googleapis.com/css?family=Roboto+Condensed' rel='stylesheet' type='text/css'>
     <link href="css/app.css" rel="stylesheet">
+    <link href="login/css/login.css" rel="stylesheet">
 </head>
 <body>
 <div class="wrapper">
@@ -26,6 +28,7 @@
         <div class="tabs">
         <a ui-sref="golfer-view">golfer view</a>
         <a ui-sref="golfer-list-view">golfer list view</a>
+            <a ui-sref="login-view">login</a>
         </div>
     </div>
     <!-- ngView -->
