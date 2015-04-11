@@ -9,4 +9,6 @@ var app = angular.module('tng-login', [
     'ui.router'
 ]).controller('loginController', function($scope){
     $scope.title = "Login";
+}).controller('forgotPasswordController', function($scope){
+    $scope.title = "Forgot Password"
 });

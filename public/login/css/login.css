@@ -16,7 +16,7 @@
     margin-top:15px;
     height:40px;
     border-radius:5px;
-    padding-left:5px;
+    padding-left:15px;
     border:solid #ccc 1px;
     background:ghostwhite;
 }
@@ -49,4 +49,18 @@
     margin:10px auto 30px auto;
     width: 80px;;
     height:80px;
+}
+
+.login-helper {
+    margin:10px auto;
+    text-align:center;
+}
+
+.login-helper a {
+    margin:10px auto;
+    text-align:center;
+}
+
+.forgot-password-text {
+
 }

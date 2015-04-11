@@ -28,6 +28,11 @@ var app = angular.module('the-network-golf', [
                 url:'/signin',
                 templateUrl: 'login/views/login.html',
                 controller: 'loginController'
+            })
+            .state('forgot-password',{
+                url:'/forgot-password',
+                templateUrl: 'login/views/forgot-password.html',
+                controller: 'forgotPasswordController'
             });
         // Use Html 5 Mode
         $locationProvider.html5Mode({
