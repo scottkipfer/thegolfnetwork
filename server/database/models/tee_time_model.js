@@ -6,8 +6,11 @@ var TeeTimeSchema = new Schema({
     time:{
         type:Date
     },
-    Golfers: {
+    golfers: {
         type: Array
+    },
+    league_round: {
+        type: String
     }
 });
 
