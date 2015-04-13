@@ -52,23 +52,24 @@ exports.create = function (req,res) {
     });
 };
 
-// Read Tee Times
+// Read League Round
 exports.read = function (req, res) {
-    TeeTime.find().sort('time').exec(function(err,tee_times) {
+    TeeTime.find().exec(function(err,league_round) {
         if(err){
             return res.status(500).json({
                 error: 'Cannot get tee times'
             })
         }
-        res.json(tee_times);
+        res.json(league_round);
     });
 };
 
 // Update Tee Time
 exports.update = function (req,res) {
-    var tee_time = req.tee_time;
+    var league_round = req.league_round;
 
-    tee_time.time = req.body.time;
+    league_round.name = req.body.league_round.name;
+
     tee_time.golfers = req.body.golfers;
 
     tee_time.save(function(err){

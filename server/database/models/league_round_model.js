@@ -15,6 +15,9 @@ var LeagueRoundSchema = new Schema({
     },
     dont_care: {
         type: Array
+    },
+    course: {
+        type: String
     }
 });
 

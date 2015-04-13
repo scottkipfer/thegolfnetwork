@@ -8,7 +8,8 @@ var app = angular.module('the-network-golf', [
     'ui.bootstrap',
     'ui.router',
     'network-golf-controllers',
-    'tng-login'
+    'tng-login',
+    'tng-schedule'
 ])
     // Configure Routes for the application
     .config(['$stateProvider', '$urlRouterProvider', '$locationProvider', function ($stateProvider, $urlRouterProvider, $locationProvider) {
@@ -33,7 +34,13 @@ var app = angular.module('the-network-golf', [
                 url:'/forgot-password',
                 templateUrl: 'login/views/forgot-password.html',
                 controller: 'forgotPasswordController'
+            })
+            .state('schedule-view', {
+                url:'/league-schedule',
+                templateUrl: 'schedule/views/schedule-view.html',
+                controller: 'scheduleController'
             });
+
         // Use Html 5 Mode
         $locationProvider.html5Mode({
             enabled: true

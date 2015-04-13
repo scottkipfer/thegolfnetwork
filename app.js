@@ -50,6 +50,8 @@ app.route('/api/xboxgames/:id').get(function (req, res) {
 
 });
 
+require('./server/routes/routes.js')(app);
+
 // Handle all angular requests
 app.get('*', function (req, res) {
     res.sendfile('./public/views/index.html');
