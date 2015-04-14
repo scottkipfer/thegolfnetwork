@@ -11,7 +11,7 @@ exports.tee_time = function(req, res, next, id){
             return next(err);
         }
         if(!tee_time){
-            return next(new Error('Failed to get team itme ' + id));
+            return next(new Error('Failed to get team time ' + id));
         }
         req.tee_time = tee_time;
         next();

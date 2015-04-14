@@ -8,6 +8,7 @@ var app = angular.module('the-network-golf', [
     'ui.bootstrap',
     'ui.router',
     'network-golf-controllers',
+    'ngResource',
     'tng-login',
     'tng-schedule'
 ])
@@ -37,6 +38,11 @@ var app = angular.module('the-network-golf', [
             })
             .state('schedule-view', {
                 url:'/league-schedule',
+                templateUrl: 'schedule/views/schedule-view.html',
+                controller: 'scheduleController'
+            })
+            .state('league round by id', {
+                url:'/league-round/:leagueroundID',
                 templateUrl: 'schedule/views/schedule-view.html',
                 controller: 'scheduleController'
             });

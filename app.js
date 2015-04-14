@@ -7,6 +7,7 @@ var express = require('express');
 var app = express();
 var morgan = require('morgan');
 var favicon = require('serve-favicon');
+var bodyParser = require('body-parser');
 
 // Connect to the Database
 require('./server/database/connect');
@@ -16,6 +17,7 @@ var port = process.env.PORT || 8080;
 app.use(express.static(__dirname + '/public'));
 app.use(morgan("dev"));
 app.use(favicon(__dirname + '/public/img/thenetworkfav.png'));
+app.use(bodyParser.json());
 
 
 // Api Route to get game data from xboxapi.com

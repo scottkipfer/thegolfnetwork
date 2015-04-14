@@ -1,23 +1,26 @@
 'use strict';
 
 var mongoose = require('mongoose');
-var LeagueRound = mongoose.model.('LeagueRound');
-var TeeTime = mongoose.model.('TeeTime');
+var LeagueRound = mongoose.model('LeagueRound');
+var TeeTime = mongoose.model('TeeTime');
 
 var createTeeTimes = function(league_round){
     var numberOfTeeTimes = 8;
     var minBetweenTeeTimes =10;
-    var startingTeeTime = new Date(1988,6,28,17,15,0,0);
+    var startingTeeTime = new Date(1988,6,28,17,5,0,0);
+    var TeeTime_Time = startingTeeTime;
+    var i;
 
     for(i=0;i<numberOfTeeTimes;i++){
-        var minToAdd = i * minBetweenTeeTimes;
-        var TeeTime_Time = startingTeeTime.setMinutes(startingTeeTime.getMinutes() + minToAdd);
-
+        TeeTime_Time.setMinutes(startingTeeTime.getMinutes() + minBetweenTeeTimes);
+        console.log(TeeTime_Time);
         var tee_time = new TeeTime({
-            time: TeeTime_Time,
+            time: new Date(TeeTime_Time),
             golfers:[],
             league_round: league_round._id
         });
+
+        console.log(tee_time.time);
 
         tee_time.save(function(err){
            if(err){
@@ -29,9 +32,23 @@ var createTeeTimes = function(league_round){
     }
 };
 
+exports.league_round = function(req, res, next, id){
+    LeagueRound.load(id, function(err, league_round){
+        if(err){
+            return next(err);
+        }
+        if(!league_round){
+            return next(new Error('Failed to get round ' + id));
+        }
+        req.league_round = league_round;
+        next();
+    });
+};
+
 
 // Create League Round
 exports.create = function (req,res) {
+    console.log(req.body);
     var league_round = new LeagueRound(req.body);
     league_round.save(function(err) {
         if (err) {
@@ -54,7 +71,7 @@ exports.create = function (req,res) {
 
 // Read League Round
 exports.read = function (req, res) {
-    TeeTime.find().exec(function(err,league_round) {
+    LeagueRound.find().exec(function(err,league_round) {
         if(err){
             return res.status(500).json({
                 error: 'Cannot get tee times'
@@ -69,29 +86,30 @@ exports.update = function (req,res) {
     var league_round = req.league_round;
 
     league_round.name = req.body.league_round.name;
-
-    tee_time.golfers = req.body.golfers;
-
-    tee_time.save(function(err){
+    league_round.date = req.body.league_round.date;
+    league_round.dont_care = req.body.league_round.dont_care;
+    league_round.cant_make_it = req.body.league_round.cant_make_it;
+    league_round.course = req.body.league_round.course;
+    league_round.save(function(err){
         if(err){
             return res.status(500).json({
-                error: 'Cannot update tee time'
+                error: 'Cannot update round'
             });
         }
-        res.json(tee_time);
+        res.json(league_round);
     });
 };
 
 // Delete Tee Time
 exports.delete = function (req, res){
-    var tee_time = req.tee_time;
+    var league_round = req.league_round;
 
-    tee_time.remove(function(err){
+    league_round.remove(function(err){
         if(err){
             return res.status(500).json({
-                error: 'Cannot remove the tee time'
+                error: 'Cannot remove the round'
             });
         }
-        res.json(tee_time);
+        res.json(league_round);
     })
 };

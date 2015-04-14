@@ -1,1 +1,18 @@
 <h1> Schedule</h1>
+
+
+<h3> Add a new League Round</h3>
+<form name="roundForm" data-ng-submit="create()">
+    <div class="input-wrapper">
+        <input required id="name_block" type="text" name="name" placeholder="Round Name" ng-model="league_round.name">
+    </div>
+    <div class="input-wrapper">
+        <input required id="date_block" type="date" name="date" placeholder="Date" ng-model="league_round.date">
+    </div>
+    <div class="input-wrapper">
+        <input required id="course_block" type="text" name="course" placeholder="Course" ng-model="league_round.course">
+    </div>
+    <div class="login-button">
+        <button type="submit" class="submit_button btn-default">Submit</button>
+    </div>
+</form>
