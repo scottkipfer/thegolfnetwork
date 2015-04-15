@@ -1,4 +1,20 @@
-<h1> Schedule</h1>
+<div class="Schedule" data-ng-init="find()">
+<h1> League Schedule</h1>
+<div class="round-list">
+    <ul class="list-unstyled">
+        <li data-ng-repeat="round in league_rounds">
+            <span>
+                <h4>{{round.date | date:'MMMM d'}}</h4>
+            </span>
+            <span>
+                <h4>{{round.name}}</h4>
+            </span>
+            <span>
+
+            </span>
+        </li>
+    </ul>
+</div>
 
 
 <h3> Add a new League Round</h3>
@@ -16,3 +32,4 @@
         <button type="submit" class="submit_button btn-default">Submit</button>
     </div>
 </form>
+</div>

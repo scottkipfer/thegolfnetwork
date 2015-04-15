@@ -17,8 +17,9 @@ var app = angular.module('tng-schedule', [
             }
         });
     }
-]).controller('scheduleController', ['$scope','$location','LeagueRounds', function($scope, $location, LeagueRounds){
+]).controller('scheduleController', ['$scope', '$stateParams','$location','LeagueRounds', function($scope, $stateParams, $location, LeagueRounds){
     $scope.title = "Schedule";
+    $scope.schedules = [];
 
     $scope.create = function(){
       var league_round = new LeagueRounds({
@@ -27,9 +28,15 @@ var app = angular.module('tng-schedule', [
           course: this.league_round.course
       });
         console.log(league_round);
-        league_round.$save(function(response) {
-            $location.path('league-round/' + response._id);
+        league_round.$save(function() {
+            $scope.find();
         })
     };
+
+    $scope.find = function() {
+        LeagueRounds.query(function(league_rounds) {
+            $scope.league_rounds = league_rounds;
+        })
+    }
 
 }]);
