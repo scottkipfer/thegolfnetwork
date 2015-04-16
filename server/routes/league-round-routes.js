@@ -10,7 +10,7 @@ module.exports = function(app) {
         .post(league_round.create);
 
     app.route('/league-round/:leagueroundId')
-        .get(league_round.read)
+        .get(league_round.show)
         .put(league_round.update)
         .delete(league_round.delete);
     app.param('leagueroundId', league_round.league_round);

@@ -1,29 +1,29 @@
 <div class="Schedule" data-ng-init="find()">
-<h1> League Schedule</h1>
-<div class="round-list">
-    <ul class="list-unstyled">
-        <li data-ng-repeat="round in league_rounds">
-            <span>
-                <h4>{{round.date | date:'MMMM d'}}</h4>
-            </span>
-            <span>
-                <h4>{{round.name}}</h4>
-            </span>
-            <span>
-
-            </span>
-        </li>
-    </ul>
+<div class="round-list-container">
+    <h3> League Schedule</h3>
+            <div class="round-container" data-ng-repeat="round in league_rounds" >
+                <div class="date-box">
+                    <div class="date-box-month">
+                            {{round.date | date:'MMM'}}
+                    </div>
+                    <div class = "date-box-day">
+                            {{round.date | date:'dd'}}
+                    </div>
+                </div>
+                <div class="round-info">
+                   <h4> <a ng-href="#/league-round/{{round._id}}">{{round.name}}</a></h4>
+                </div>
+            </div>
 </div>
 
-
-<h3> Add a new League Round</h3>
+    <div class="round-list-container">
+<h3> Add a new round</h3>
 <form name="roundForm" data-ng-submit="create()">
     <div class="input-wrapper">
-        <input required id="name_block" type="text" name="name" placeholder="Round Name" ng-model="league_round.name">
+        <input required id="date_block" type="date" name="date" placeholder="Date" ng-model="league_round.date">
     </div>
     <div class="input-wrapper">
-        <input required id="date_block" type="date" name="date" placeholder="Date" ng-model="league_round.date">
+        <input required id="name_block" type="text" name="name" placeholder="Round Name" ng-model="league_round.name">
     </div>
     <div class="input-wrapper">
         <input required id="course_block" type="text" name="course" placeholder="Course" ng-model="league_round.course">
@@ -33,3 +33,4 @@
     </div>
 </form>
 </div>
+    </div>

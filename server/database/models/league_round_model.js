@@ -28,5 +28,11 @@ var LeagueRoundSchema = new Schema({
 /***************************************************************************************************
  *                                      Pre Save Hooks
  ***************************************************************************************************/
+LeagueRoundSchema.statics.load = function(id,cb) {
+    this.findOne({
+        _id:id
+    }).exec(cb);
+};
+
 
 module.exports = mongoose.model('LeagueRound', LeagueRoundSchema);

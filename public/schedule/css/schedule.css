@@ -1,0 +1,53 @@
+* {
+    font-family: "Roboto Condensed";
+}
+
+.round-list-container {
+    width:90%;
+    margin:auto;
+}
+
+.round-list-container h3 {
+    margin-bottom:20px;
+}
+
+.round-list{
+    list-style:none;
+    margin:0;
+    padding:0;
+}
+.round-container{
+    margin-bottom:20px;
+    margin-left:20px;
+}
+.round-container * {
+    display:inline;
+}
+
+.date-box {
+    background:ghostwhite;
+    width:90px;
+    border-radius:5px;
+    height:50px;
+    margin-right:15px;
+}
+
+.date-box-month {
+    background:#84b1e6;
+    padding:5px;
+    border-radius:5px 0px 0px 5px;
+    text-align:center;
+    color:ghostwhite;
+    height:50px;
+}
+
+.date-box-day {
+    padding:5px;
+    background:ghostwhite;
+    border-radius:0px 5px 5px 0px;
+    text-align:center;
+    height:50px;
+}
+
+.round-info {
+}

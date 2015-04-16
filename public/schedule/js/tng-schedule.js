@@ -36,7 +36,16 @@ var app = angular.module('tng-schedule', [
     $scope.find = function() {
         LeagueRounds.query(function(league_rounds) {
             $scope.league_rounds = league_rounds;
-        })
-    }
+        });
+    };
+
+    $scope.findOne = function() {
+        LeagueRounds.get({
+            leagueroundId: $stateParams.leagueroundId
+        }, function(round){
+            console.log(round);
+            $scope.round = round;
+        });
+    };
 
 }]);

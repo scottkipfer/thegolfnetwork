@@ -42,13 +42,13 @@ var app = angular.module('the-network-golf', [
                 controller: 'scheduleController'
             })
             .state('league round by id', {
-                url:'/league-round/:leagueroundID',
-                templateUrl: 'schedule/views/schedule-view.html',
+                url:'/league-round/:leagueroundId',
+                templateUrl: 'schedule/views/league-round-view.html',
                 controller: 'scheduleController'
             });
 
         // Use Html 5 Mode
         $locationProvider.html5Mode({
-            enabled: true
+            enabled: false
         });
     }]);

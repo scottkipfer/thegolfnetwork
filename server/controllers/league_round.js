@@ -13,15 +13,11 @@ var createTeeTimes = function(league_round){
 
     for(i=0;i<numberOfTeeTimes;i++){
         TeeTime_Time.setMinutes(startingTeeTime.getMinutes() + minBetweenTeeTimes);
-        console.log(TeeTime_Time);
         var tee_time = new TeeTime({
             time: new Date(TeeTime_Time),
             golfers:[],
             league_round: league_round._id
         });
-
-        console.log(tee_time.time);
-
         tee_time.save(function(err){
            if(err){
                return {
@@ -71,7 +67,7 @@ exports.create = function (req,res) {
 
 // Read League Round
 exports.read = function (req, res) {
-    LeagueRound.find().exec(function(err,league_round) {
+    LeagueRound.find().sort('date').exec(function(err,league_round) {
         if(err){
             return res.status(500).json({
                 error: 'Cannot get tee times'
@@ -79,6 +75,11 @@ exports.read = function (req, res) {
         }
         res.json(league_round);
     });
+};
+
+// Show League Round
+exports.show = function(req,res) {
+    res.json(req.league_round);
 };
 
 // Update Tee Time
