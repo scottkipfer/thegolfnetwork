@@ -4,7 +4,18 @@ angular.module('network-golf-controllers',[]).controller('golferController', fun
     $scope.name.last = 'Kipfer';
 
 
-}).controller('golferListController', function($scope){
+}).controller('MainController', function($scope){
+
+    $scope.loggedin = false;
+    $scope.menuIsOpen = false;
+
+    $scope.open_menu = function(){
+      if($scope.menuIsOpen === false){
+          $scope.menuIsOpen = true;
+      }else {
+          $scope.menuIsOpen = false;
+      }
+    };
     $scope.getAllGolfers = function(){
       //return golferService.getAllGolfers(); todo
         return [{

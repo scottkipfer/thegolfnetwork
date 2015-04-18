@@ -2,23 +2,46 @@
     position:absolute;
     left:50%;
     top:50%;
-    width:300px;
-    margin-left:-150px;
-    height:400px;
-    margin-top: -200px;
+    width:350px;
+    margin-left:-175px;
+    height:500px;
+    margin-top: -250px;
     padding:20px;
 
-    border-radius:25px;
+}
+
+.input-wrapper {
+    position:relative;
+    display:inline;
+
 }
 
 .input-wrapper input{
     width:100%;
-    margin-top:15px;
-    height:40px;
-    border-radius:5px;
-    padding-left:15px;
-    border:solid #ccc 1px;
-    background:ghostwhite;
+    margin-top:35px;
+    height:50px;
+    padding-left:60px;
+    background:rgba(256,256,256,0.5);
+    opacity: 20;
+    border:none;
+    color:white;
+    font-size:16px;
+}
+
+::-webkit-input-placeholder {
+    color: white;
+}
+
+:-moz-placeholder { /* Firefox 18- */
+    color: white;
+}
+
+::-moz-placeholder {  /* Firefox 19+ */
+    color: white;
+}
+
+:-ms-input-placeholder {
+    color: white;
 }
 
 .input-wrapper input:invalid {
@@ -31,9 +54,8 @@
 
 .login-button button {
     width:100%;
-    margin-top:15px;
-    height:40px;
-    border-radius:5px;
+    margin-top:35px;
+    height:50px;
     background: #84b1e6;
     border:none;
     color:ghostwhite;
@@ -46,9 +68,9 @@
 }
 
 .login-logo {
-    margin:10px auto 30px auto;
-    width: 80px;;
-    height:80px;
+    margin:0px auto 50px auto;
+    width: 115px;;
+    height:100px;
 }
 
 .login-helper {
@@ -64,3 +86,22 @@
 .forgot-password-text {
 
 }
+
+.glyphicon.glyphicon-envelope {
+    font-size: 25px;
+    color:white;
+}
+.glyphicon.glyphicon-lock {
+    font-size: 25px;
+    color:white;
+}
+
+.input-wrapper .glyphicon {
+    position: absolute;
+    padding: 10px;
+    pointer-events: none;
+    left:5px;
+    top:-15px;
+
+}
+

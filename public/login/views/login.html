@@ -1,20 +1,20 @@
 <div class="login-wrapper">
 
     <div class="login-logo">
-        <ng-include src="'login/img/login-logo.svg'"></ng-include>
+        <ng-include src="'login/img/login-logo3.svg'"></ng-include>
     </div>
 
     <form id="login_form" ng-submit="login()">
         <div class="input-wrapper">
-            <input required id="email_block" type="email" name="email" placeholder="Email Address" ng-model="user.email">
-            <span class="pic email"></span>
+            <span class="glyphicon glyphicon-envelope" aria-hidden="true"></span>
+            <input required id="email_block" type="email" name="email" placeholder="EMAIL ADDRESS" ng-model="user.email">
         </div>
         <div class="input-wrapper">
-            <input required id="pw_block" type="password" name="password" placeholder="Password" ng-model="user.password">
-            <span class="pic email"></span>
+            <span class="glyphicon glyphicon-lock" aria-hidden="true"></span>
+            <input required id="pw_block" type="password" name="password" placeholder="PASSWORD" ng-model="user.password">
         </div>
         <div class="login-button">
-            <button type="submit" class="submit_button btn-default">Sign In</button>
+            <button type="submit" class="submit_button btn-default">LOG IN</button>
         </div>
     </form>
 
