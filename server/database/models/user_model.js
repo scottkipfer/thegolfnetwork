@@ -79,26 +79,7 @@ UserSchema.methods.hashPassword = function(password) {
 };
 
 UserSchema.methods.authenticate = function(password) {
-    return this.password === this.hashPassword(password);
-};
-
-UserSchema.statics.findUniqueEmail = function(email, suffix, callback) {
-    var _this = this;
-    var possibleEmail = email + (suffix || '');
-
-    _this.findOne({
-        email:possibleEmail
-    }, function(err, user){
-        if(!err) {
-            if(!user) {
-                callback(possibleEmail);
-            } else {
-                return _this.findUniqueEmail(username, (suffix||0) +1, callback);
-            }
-        } else {
-            callback(null);
-        }
-    });
+    return this.hashed_password === this.hashPassword(password);
 };
 
 UserSchema.set('toJSON', {

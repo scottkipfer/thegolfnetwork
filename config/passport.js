@@ -9,6 +9,7 @@ module.exports = function() {
     });
 
     passport.deserializeUser(function(id,done){
+        console.log('here');
         User.findOne({
             _id:id
         }, '-password -salt', function(err,user) {

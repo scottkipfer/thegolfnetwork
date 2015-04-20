@@ -14,7 +14,7 @@ var app = angular.module('tng-login', [
 
     $scope.login = function(){
         $http.post('/signin', {
-            email:$scope.user.email,
+            username:$scope.user.email,
             password:$scope.user.password
         })
         .success(function(response) {

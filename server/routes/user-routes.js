@@ -8,8 +8,10 @@ module.exports = function(app) {
         .post(users.signup);
 
     app.route('/signin')
-        .post(passport.authenticate('local',{failureRedirect: '/signin1'}), function(req,res) {
-            console.log(req.user);
+        .post(passport.authenticate('local',{failureRedirect: '/signin'}), function(req,res) {
+            //todo send jwt here
+            req.user.salt = "";
+            req.user.hashed_password="";
             res.send({
                 user:req.user
             });
