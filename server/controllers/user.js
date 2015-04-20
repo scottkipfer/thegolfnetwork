@@ -38,6 +38,7 @@ exports.signup = function(req, res, next) {
             }
 
             req.login(user, function(err) {
+                console.log(user);
                 if(err){
                     return next(err);
                 }
@@ -51,9 +52,11 @@ exports.signup = function(req, res, next) {
 
 exports.signin = function(req, res) {
   if(req.isAuthenticated()){
+      console.log('signed in');
       return res.redirect('/');
+  } else {
+      console.log('couldnt sign in');
   }
-
     res.redirect('#/signin');
 };
 

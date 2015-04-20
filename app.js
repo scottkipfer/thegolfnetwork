@@ -10,12 +10,13 @@ var favicon = require('serve-favicon');
 var bodyParser = require('body-parser');
 var passport = require('passport');
 var passport_config = require('./config/passport.js');
+var session = require('express-session');
 
 // Connect to the Database
 require('./server/database/connect');
 
 // Set up Auth
-passport_config();
+
 
 // Set the port
 var port = process.env.PORT || 8080;
@@ -26,9 +27,19 @@ app.use(favicon(__dirname + '/public/img/thenetworkfav.png'));
 app.use(bodyParser.json());
 app.set('view engine','html');
 
+app.use(session({
+    secret:'secret',
+    cookie:{
+        maxAge: 360000
+    }
+
+}));
+
 //use passport
 app.use(passport.initialize());
 app.use(passport.session());
+
+passport_config();
 
 var auth = require('./server/controllers/authorization.js');
 require('./server/routes/routes.js')(app,auth);

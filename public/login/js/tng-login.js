@@ -17,17 +17,16 @@ var app = angular.module('tng-login', [
             email:$scope.user.email,
             password:$scope.user.password
         })
-            .success(function(response) {
-                //AUTH OK!
-                console.log('OK');
-                $scope.loginError = 0;
-                $rootScope.user = response.user;
-                $rootScope.$emit('loggedin');
-                $state.go('schedule-view');
-            })
-            .error(function(){
-                $scope.loginerror = 'Authentication failed';
-            })
+        .success(function(response) {
+            //AUTH OK!
+            console.log(response.user);
+            $scope.loginError = 0;
+            $rootScope.user = response.user;
+            $rootScope.$emit('loggedin');
+        })
+        .error(function(){
+            $scope.loginerror = 'Authentication failed';
+        });
     }
 
 }).controller('forgotPasswordController', function($scope){
