@@ -96,6 +96,11 @@
     color:white;
 }
 
+.glyphicon.glyphicon-user {
+    font-size: 25px;
+    color:white;
+}
+
 .input-wrapper .glyphicon {
     position: absolute;
     padding: 10px;

@@ -8,9 +8,15 @@ var app = express();
 var morgan = require('morgan');
 var favicon = require('serve-favicon');
 var bodyParser = require('body-parser');
+var passport = require('passport');
+var passport_config = require('./config/passport.js');
 
 // Connect to the Database
 require('./server/database/connect');
+
+// Set up Auth
+passport_config();
+
 // Set the port
 var port = process.env.PORT || 8080;
 // Set the static directory
@@ -20,8 +26,12 @@ app.use(favicon(__dirname + '/public/img/thenetworkfav.png'));
 app.use(bodyParser.json());
 app.set('view engine','html');
 
+//use passport
+app.use(passport.initialize());
+app.use(passport.session());
 
-require('./server/routes/routes.js')(app);
+var auth = require('./server/controllers/authorization.js');
+require('./server/routes/routes.js')(app,auth);
 
 // Handle all angular requests
 app.get('*', function (req, res) {

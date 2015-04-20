@@ -45,6 +45,11 @@ var app = angular.module('the-network-golf', [
                 url:'/league-round/:leagueroundId',
                 templateUrl: 'schedule/views/league-round-view.html',
                 controller: 'scheduleController'
+            })
+            .state('sign-up-view', {
+                url:'/signup',
+                templateUrl: 'login/views/signup.html',
+                controller:'signupController'
             });
 
         // Use Html 5 Mode

@@ -7,7 +7,7 @@ var escapeProperty = function(value) {
     return _.escape(value);
 };
 
-var validateUniqueEmail = function(value){
+var validateUniqueEmail = function(value, callback){
     var User = mongoose.model('User');
     User.find({
         $and:[{
@@ -23,23 +23,13 @@ var validateUniqueEmail = function(value){
 };
 
 var validatePresenceOf = function(value){
-    return (value && value.length);
-}
+    return (value && value.length > 5);
+};
 
 
 var UserSchema = new Schema({
-   name: {
-       first: {
-           type: String,
-           required: true,
-           get: escapeProperty
-       },
-       last: {
-           type: String,
-           required: true,
-           get:escapeProperty
-       }
-   },
+    firstName: String,
+    lastName: String,
     email: {
         type: String,
         require: true,
@@ -53,7 +43,7 @@ var UserSchema = new Schema({
     },
     hashed_password: {
         type: String,
-        validate: [validatePresenceOf, ' Password cannot be blank']
+        validate: [validatePresenceOf, ' Password Must Be 6 characters long']
     },
     salt: String
 });
@@ -61,11 +51,19 @@ var UserSchema = new Schema({
 /***************************************************************************************************
  *                                      Virtuals
  ***************************************************************************************************/
+UserSchema.virtual('fullName').get(function() {
+    return this.firstName + ' ' + this.lastName;
+}).set(function(fullName) {
+    var splitName = fullName.split(' ');
+    this.firstName = splitName[0] || '';
+    this.lastName = splitName[1] || '';
+});
+
 UserSchema.virtual('password').set(function(password) {
     this._password = password;
-    this.salt = this.makeSalt();
+    this.salt = new Buffer(crypto.randomBytes(16).toString('base64'), 'base64');
     this.hashed_password = this.hashPassword(password);
-}).get(function() {
+}).get(function(){
     return this._password;
 });
 
@@ -73,5 +71,39 @@ UserSchema.virtual('password').set(function(password) {
  *                                      Pre Save Hooks
  ***************************************************************************************************/
 
+/***************************************************************************************************
+ *                                      Methods
+ ***************************************************************************************************/
+UserSchema.methods.hashPassword = function(password) {
+    return crypto.pbkdf2Sync(password, this.salt, 1000, 64).toString('base64');
+};
+
+UserSchema.methods.authenticate = function(password) {
+    return this.password === this.hashPassword(password);
+};
+
+UserSchema.statics.findUniqueEmail = function(email, suffix, callback) {
+    var _this = this;
+    var possibleEmail = email + (suffix || '');
+
+    _this.findOne({
+        email:possibleEmail
+    }, function(err, user){
+        if(!err) {
+            if(!user) {
+                callback(possibleEmail);
+            } else {
+                return _this.findUniqueEmail(username, (suffix||0) +1, callback);
+            }
+        } else {
+            callback(null);
+        }
+    });
+};
+
+UserSchema.set('toJSON', {
+    getters: true,
+    virtuals: true
+});
 
 module.exports = mongoose.model('User', UserSchema);

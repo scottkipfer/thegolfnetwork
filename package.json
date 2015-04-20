@@ -17,6 +17,8 @@
     "mongoose": "^4.0.1",
     "mongoose-post-find": "0.0.2",
     "morgan": "~1.5.1",
+    "passport": "^0.2.1",
+    "passport-local": "^1.0.0",
     "serve-favicon": "^2.2.0"
   }
 }

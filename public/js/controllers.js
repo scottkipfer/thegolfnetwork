@@ -6,7 +6,7 @@ angular.module('network-golf-controllers',[]).controller('golferController', fun
 
 }).controller('MainController', function($scope){
 
-    $scope.loggedin = false;
+    $scope.loggedin = true;
     $scope.menuIsOpen = false;
 
     $scope.open_menu = function(){

@@ -2,11 +2,9 @@
 
 var league_round = require('../controllers/league_round.js');
 
-
-module.exports = function(app) {
-
+module.exports = function(app,auth) {
     app.route('/league-round')
-        .get(league_round.read)
+        .get(auth.requiresLogin, league_round.read)
         .post(league_round.create);
 
     app.route('/league-round/:leagueroundId')
