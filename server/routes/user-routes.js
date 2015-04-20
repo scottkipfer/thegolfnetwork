@@ -8,7 +8,12 @@ module.exports = function(app) {
         .post(users.signup);
 
     app.route('/signin')
-        .post(users.signin);
+        .post(passport.authenticate('local',{failureRedirect: '/signin1'}), function(req,res) {
+            console.log(req.user);
+            res.send({
+                user:req.user
+            });
+        });
 
     app.route('/signout')
         .get(users.signout);
