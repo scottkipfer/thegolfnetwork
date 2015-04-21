@@ -7,8 +7,26 @@ var app = angular.module('tng-login', [
     'angular-jwt',
     'ui.bootstrap',
     'ui.router'
-]).controller('loginController', function($scope, $rootScope, $http, $state){
+]).controller('loginController', function($scope, $rootScope, $http, store, jwtHelper, $state){
     $scope.title = "Login";
+
+    var checkUserToken = function(){
+        var user_token = store.get('token');
+        console.log(user_token);
+        if(user_token){
+            var isExpired = jwtHelper.isTokenExpired(user_token);
+            if(!isExpired){
+                $state.go('schedule-view');
+            } else {
+                store.remove('token');
+            }
+        }
+    };
+
+    checkUserToken();
+
+
+
 
     $scope.user = {};
 
@@ -19,7 +37,11 @@ var app = angular.module('tng-login', [
         })
         .success(function(response) {
             //AUTH OK!
-            console.log(response.user);
+            console.log(response.token);
+                if(response.token){
+                    store.set('token', response.token);
+                    checkUserToken();
+                }
             $scope.loginError = 0;
             $rootScope.user = response.user;
             $rootScope.$emit('loggedin');

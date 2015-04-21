@@ -2,6 +2,7 @@
 
 var users = require('../controllers/user.js');
 var passport = require('passport');
+var jwt = require('jsonwebtoken');
 
 module.exports = function(app) {
     app.route('/signup')
@@ -10,10 +11,13 @@ module.exports = function(app) {
     app.route('/signin')
         .post(passport.authenticate('local',{failureRedirect: '/signin'}), function(req,res) {
             //todo send jwt here
+            var secret = process.env.SECRET;
+            console.log(secret);
             req.user.salt = "";
             req.user.hashed_password="";
+            var token = jwt.sign({user:req.user},secret, {expiresInMinutes:10});
             res.send({
-                user:req.user
+                token:token
             });
         });
 
