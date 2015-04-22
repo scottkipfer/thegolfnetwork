@@ -63,4 +63,28 @@ var app = angular.module('the-network-golf', [
         $locationProvider.html5Mode({
             enabled: false
         });
-    }]);
+    }])
+    .run(function($rootScope, store, jwtHelper, $state) {
+        // This events gets triggered on refresh or URL change
+        $rootScope.$on('$stateChangeSuccess', function(event,toState) {
+            console.log(toState.name);
+               var token = store.get('token');
+                console.log(token);
+                if (token) {
+                    if (!jwtHelper.isTokenExpired(token)) {
+                        console.log('token is good');
+                    } else {
+                        // Either show Login page or use the refresh token to get a new idToken
+                        console.log('token is expired');
+                        if(toState.name !== 'login-view'){
+                            $state.go('login-view',{reload:true});
+                        }
+                    }
+                } else {
+                    console.log('no token');
+                    if(toState.name !== 'login-view'){
+                        $state.go('login-view',{reload:true});
+                    }
+                }
+        });
+    });

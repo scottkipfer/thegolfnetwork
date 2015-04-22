@@ -17,9 +17,10 @@ var app = angular.module('tng-schedule', [
             }
         });
     }
-]).controller('scheduleController', ['$scope', '$stateParams','$location','LeagueRounds', function($scope, $stateParams, $location, LeagueRounds){
+]).controller('scheduleController', ['$scope', '$stateParams','$location','LeagueRounds','jwtHelper','store','$state', function($scope, $stateParams, $location, LeagueRounds, jwtHelper,store,$state){
     $scope.title = "Schedule";
     $scope.schedules = [];
+
 
     $scope.create = function(){
       var league_round = new LeagueRounds({
