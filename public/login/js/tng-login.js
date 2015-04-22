@@ -10,9 +10,9 @@ var app = angular.module('tng-login', [
 ]).controller('loginController', function($scope, $rootScope, $http, store, jwtHelper, $state){
     $scope.title = "Login";
 
+    //TODO make a service
     var checkUserToken = function(){
         var user_token = store.get('token');
-        console.log(user_token);
         if(user_token){
             var isExpired = jwtHelper.isTokenExpired(user_token);
             if(!isExpired){
@@ -22,11 +22,7 @@ var app = angular.module('tng-login', [
             }
         }
     };
-
     checkUserToken();
-
-
-
 
     $scope.user = {};
 
@@ -37,25 +33,35 @@ var app = angular.module('tng-login', [
         })
         .success(function(response) {
             //AUTH OK!
-            console.log(response.token);
-                if(response.token){
-                    store.set('token', response.token);
-                    checkUserToken();
-                }
+            if(response.token){
+                store.set('token', response.token);
+                checkUserToken();
+            }
             $scope.loginError = 0;
-            $rootScope.user = response.user;
-            $rootScope.$emit('loggedin');
         })
         .error(function(){
             $scope.loginerror = 'Authentication failed';
         });
-    }
+    };
 
 }).controller('forgotPasswordController', function($scope){
     $scope.title = "Forgot Password";
-}).controller('signupController', function($scope, $rootScope, $http, $location){
+}).controller('signupController', function($scope, $rootScope, $http, $state, jwtHelper, store){
     $scope.title = "Sign Up";
     $scope.user = {};
+
+    var checkUserToken = function(){
+        var user_token = store.get('token');
+        if(user_token){
+            var isExpired = jwtHelper.isTokenExpired(user_token);
+            if(!isExpired){
+                $state.go('schedule-view');
+            } else {
+                store.remove('token');
+            }
+        }
+    };
+    checkUserToken();
 
     $scope.signup = function() {
          $scope.usernameError = null;
@@ -67,12 +73,14 @@ var app = angular.module('tng-login', [
                 password: $scope.user.password,
                 fullName: $scope.user.name
             })
-                .success(function() {
+                .success(function(response) {
                     //AUTH OK!
+                    if(response.token){
+                        store.set('token', response.token);
+                        checkUserToken();
+                    }
                     $scope.registerError = null;
-                    $rootScope.user = $scope.user;
-                    $rootScope.$emit('loggin');
-                    $location.url('#/league-schedule');
+
                 })
                 .error(function(error) {
                     //AUTH FAILED!

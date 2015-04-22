@@ -4,9 +4,23 @@ angular.module('network-golf-controllers',[]).controller('golferController', fun
     $scope.name.last = 'Kipfer';
 
 
-}).controller('MainController', function($scope){
+}).controller('MainController', function($scope, store, jwtHelper){
 
-    $scope.loggedin = true;
+    var checkUserToken = function(){
+        var user_token = store.get('token');
+        if(user_token){
+            var isExpired = jwtHelper.isTokenExpired(user_token);
+            if(!isExpired){
+                return true;
+            } else {
+                store.remove('token');
+                return false;
+            }
+        } else {
+            return false;
+        }
+    };
+    $scope.loggedin = checkUserToken();
     $scope.menuIsOpen = false;
 
     $scope.open_menu = function(){
