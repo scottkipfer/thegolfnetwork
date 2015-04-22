@@ -13,7 +13,8 @@ var app = angular.module('the-network-golf', [
     'tng-schedule'
 ])
     // Configure Routes for the application
-    .config(['$stateProvider', '$urlRouterProvider', '$locationProvider', function ($stateProvider, $urlRouterProvider, $locationProvider) {
+    .config(['$stateProvider', '$urlRouterProvider', '$locationProvider', 'jwtInterceptorProvider', '$httpProvider',
+        function ($stateProvider, $urlRouterProvider, $locationProvider, jwtInterceptorProvider , $httpProvider) {
         $urlRouterProvider.otherwise('/');
         $stateProvider
             .state('golfer-list-view', {
@@ -51,6 +52,12 @@ var app = angular.module('the-network-golf', [
                 templateUrl: 'login/views/signup.html',
                 controller:'signupController'
             });
+
+        jwtInterceptorProvider.tokenGetter = ['store', function(store) {
+            return store.get('token');
+        }];
+
+        $httpProvider.interceptors.push('jwtInterceptor');
 
         // Use Html 5 Mode
         $locationProvider.html5Mode({

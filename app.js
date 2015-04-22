@@ -11,6 +11,7 @@ var bodyParser = require('body-parser');
 var passport = require('passport');
 var passport_config = require('./config/passport.js');
 var session = require('express-session');
+var jwt = require('express-jwt');
 
 // Connect to the Database
 require('./server/database/connect');
@@ -31,7 +32,8 @@ app.set('view engine','html');
 app.use(passport.initialize());
 app.use(passport.session());
 
-
+//use jwt
+app.use(jwt({ secret: process.env.SECRET, requestProperty:'auth.token'}).unless({path: ['/','/signin','/signup']}));
 
 var auth = require('./server/controllers/authorization.js');
 require('./server/routes/routes.js')(app,auth);
