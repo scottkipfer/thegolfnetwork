@@ -6,13 +6,9 @@ var CourseSchema = new Schema({
     name:{
         type: String
     },
-    rating: {
-        type: Number
-    },
-    slope: {
-        type: Number
-    },
-    holes: [{hole:Number,par:Number,handicap:Number}]
+    tees: {
+        type:Array
+    }
 });
 
 /***************************************************************************************************
