@@ -9,6 +9,7 @@ var app = angular.module('tng-login', [
     'ui.router'
 ]).controller('loginController', function($scope, $rootScope, $http, store, jwtHelper, $state){
     $scope.title = "Login";
+    $scope.user = {};
 
     //TODO make a service
     var checkUserToken = function(){
@@ -18,13 +19,14 @@ var app = angular.module('tng-login', [
             if(!isExpired){
                 $state.go('schedule-view');
             } else {
-                store.remove('token');
+                $scope.user.email = jwtHelper.decodeToken(user_token).user.email;
+                console.log($scope.user.email);
             }
         }
     };
     checkUserToken();
 
-    $scope.user = {};
+
 
     $scope.login = function(){
         $http.post('/signin', {

@@ -10,12 +10,10 @@ module.exports = function(app) {
 
     app.route('/signin')
         .post(passport.authenticate('local',{failureRedirect: '/signin'}), function(req,res) {
-            //todo send jwt here
             var secret = process.env.SECRET;
-            console.log(secret);
             req.user.salt = "";
             req.user.hashed_password="";
-            var token = jwt.sign({user:req.user},secret, {expiresInMinutes:10});
+            var token = jwt.sign({user:req.user}, secret, {expiresInMinutes:1});
             res.send({
                 token:token
             });
@@ -28,9 +26,4 @@ module.exports = function(app) {
         .get(users.me);
 
     app.param('userId',users.user);
-
-    app.route('/loggedin')
-        .get(function(req,res) {
-            res.send(req.isAuthenticated() ? req.user: '0');
-        });
 };

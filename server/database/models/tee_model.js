@@ -1,9 +1,29 @@
-//todo add tees...
+var mongoose = require('mongoose');
+var Schema = mongoose.Schema;
 
-yardage..
 
-    slope
+var LeagueRoundSchema = new Schema({
+    name: {
+        type: String,
+        required: true
+    },
+    course: {
+        type: String
+    }
+});
 
-rating...
+/***************************************************************************************************
+ *                                      Virtuals
+ ***************************************************************************************************/
 
-    etc..
+/***************************************************************************************************
+ *                                      Pre Save Hooks
+ ***************************************************************************************************/
+LeagueRoundSchema.statics.load = function(id,cb) {
+    this.findOne({
+        _id:id
+    }).exec(cb);
+};
+
+
+module.exports = mongoose.model('LeagueRound', LeagueRoundSchema);
