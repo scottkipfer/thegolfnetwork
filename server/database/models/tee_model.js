@@ -1,14 +1,28 @@
 var mongoose = require('mongoose');
 var Schema = mongoose.Schema;
 
-
-var LeagueRoundSchema = new Schema({
+var TeeSchema = new Schema({
     name: {
         type: String,
         required: true
     },
     course: {
-        type: String
+        type: String,
+        required: true
+    },
+    holes: [{
+        number:Number,
+        par:Number,
+        yardage:Number,
+        handicap:Number
+    }],
+    slope: {
+        type: Number,
+        required: true
+    },
+    rating: {
+        type: Number,
+        required: true
     }
 });
 
@@ -19,11 +33,5 @@ var LeagueRoundSchema = new Schema({
 /***************************************************************************************************
  *                                      Pre Save Hooks
  ***************************************************************************************************/
-LeagueRoundSchema.statics.load = function(id,cb) {
-    this.findOne({
-        _id:id
-    }).exec(cb);
-};
 
-
-module.exports = mongoose.model('LeagueRound', LeagueRoundSchema);
+module.exports = mongoose.model('Tee', TeeSchema);

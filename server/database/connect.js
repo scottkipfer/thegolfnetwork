@@ -13,3 +13,6 @@ process.on('SIGINT', function() {
 require('../database/models/user_model.js');
 require('../database/models/league_round_model.js');
 require('../database/models/tee_time_model.js');
+require('../database/models/course_model.js');
+require('../database/models/tee_model.js');
+require('../database/models/user_round_model.js');
