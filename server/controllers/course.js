@@ -26,7 +26,6 @@ exports.create = function(req, res) {
                 error: "Cannot Create a new Course"
             });
         }
-
         res.json(course);
     });
 };
