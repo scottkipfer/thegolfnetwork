@@ -19,8 +19,10 @@ exports.tee = function(req, res, next, id) {
 // Create Tee
 exports.create = function(req, res) {
     var tee = new Tee(req.body);
+    console.log(tee);
     tee.save(function(err) {
         if(err) {
+            console.log(err);
             return res.status(500).json({
                 error: "Unable to create a new Tee"
             });
@@ -31,7 +33,8 @@ exports.create = function(req, res) {
 
 // Read Tee
 exports.read = function(req,res) {
-    Tee.find().where('course').equals(req.course).sort('name').exec(function(err,tees) {
+    console.log(req.course._id);
+    Tee.find().where('course').equals(req.course._id).sort('name').exec(function(err,tees) {
         if(err){
             return res.status(500).json({
                 error: 'Unable to get tees'
@@ -67,7 +70,7 @@ exports.update = function (req, res) {
 };
 
 // Delete Tee
-exports.tee = function(req, res) {
+exports.delete = function(req, res) {
     var tee = req.tee;
 
     tee.remove(function(err){

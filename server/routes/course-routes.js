@@ -10,5 +10,5 @@ module.exports = function(app) {
         .get(course.show)
         .put(course.update)
         .delete(course.delete);
-    app.param('courseId', course.league_round);
+    app.param('courseId', course.course);
 };

@@ -10,7 +10,8 @@ var app = angular.module('the-network-golf', [
     'network-golf-controllers',
     'ngResource',
     'tng-login',
-    'tng-schedule'
+    'tng-schedule',
+    'tng-courses'
 ])
     // Configure Routes for the application
     .config(['$stateProvider', '$urlRouterProvider', '$locationProvider', 'jwtInterceptorProvider', '$httpProvider',
@@ -51,6 +52,16 @@ var app = angular.module('the-network-golf', [
                 url:'/signup',
                 templateUrl: 'login/views/signup.html',
                 controller:'signupController'
+            })
+            .state('courses-view', {
+                url:'/courses',
+                templateUrl: 'course/views/create-course.html',
+                controller:'courseController'
+            })
+            .state('course round by id', {
+                url:'/courses/:courseId',
+                templateUrl: 'course/views/course-view.html',
+                controller: 'courseController'
             });
 
         jwtInterceptorProvider.tokenGetter = ['store', function(store) {

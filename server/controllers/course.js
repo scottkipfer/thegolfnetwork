@@ -16,7 +16,6 @@ exports.course = function(req, res, next, id) {
     });
 };
 
-
 // Create Course
 exports.create = function(req, res) {
     var course = new Course(req.body);

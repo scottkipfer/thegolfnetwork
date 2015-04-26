@@ -2,6 +2,9 @@
     font-family: "Roboto Condensed";
 }
 
+.Schedule {
+    margin-top: 100px;
+}
 .round-list-container {
     width:90%;
     margin:auto;

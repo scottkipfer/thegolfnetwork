@@ -1,0 +1,43 @@
+<div class="Schedule" data-ng-init="findOne()">
+    {{course.name}} </br>
+    {{course.address}} </br>
+    {{course.city}} </br>
+    {{course.zipcode}} </br>
+    {{tees}}
+
+    </br>
+    </br>
+    </br>
+
+</div>
+<div class ="add-tee">
+<h3> Add a new Tee</h3>
+
+<form name="roundForm" data-ng-submit="create_tee()">
+    <div class="input-wrapper">
+        <input required id="name_block" type="text" name="name" placeholder="Tee Name"
+               ng-model="tee.name">
+    </div>
+    <div class="input-wrapper" data-ng-repeat="hole in holes">
+        {{hole.number}}
+        <input required id="par_block_{{hole.number}}" type="number" name="par" placeholder="Par"
+               ng-model="holes[$index].par">
+        <input required id="yardage_block_{{hole.number}}" type="number" name="par" placeholder="Yardage"
+               ng-model="holes[$index].yardage">
+        <input required id="handicap_block_{{hole.number}}" type="number" name="par" placeholder="Handicap"
+               ng-model="holes[$index].handicap">
+    </div>
+    <div class="input-wrapper">
+        <input required id="slope_block" type="number" name="name" placeholder="Slope"
+               ng-model="tee.slope">
+    </div>
+    <div class="input-wrapper">
+        <input required id="rating_block" type="number" name="name" placeholder="Rating"
+               ng-model="tee.rating">
+    </div>
+    <div class="login-button">
+        <button type="submit" class="submit_button btn-default">Submit</button>
+    </div>
+</form>
+</div>
+</div>

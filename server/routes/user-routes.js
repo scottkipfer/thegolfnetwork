@@ -11,9 +11,10 @@ module.exports = function(app) {
     app.route('/signin')
         .post(passport.authenticate('local',{failureRedirect: '/signin'}), function(req,res) {
             var secret = process.env.SECRET;
+            var token_time = process.env.TOKEN_EXPIRE_TIME;
             req.user.salt = "";
             req.user.hashed_password="";
-            var token = jwt.sign({user:req.user}, secret, {expiresInMinutes:1});
+            var token = jwt.sign({user:req.user}, secret, {expiresInMinutes:token_time});
             res.send({
                 token:token
             });

@@ -7,13 +7,13 @@ var CourseSchema = new Schema({
         type: String,
         required:true
     },
-    tees: {
-        type:Array
-    },
     address: {
         type: String
     },
     city: {
+        type: String
+    },
+    state: {
         type: String
     },
     zipcode: {
@@ -29,5 +29,10 @@ var CourseSchema = new Schema({
 /***************************************************************************************************
  *                                      Pre Save Hooks
  ***************************************************************************************************/
+CourseSchema.statics.load = function(id,cb) {
+    this.findOne({
+        _id:id
+    }).exec(cb);
+};
 
 module.exports = mongoose.model('Course', CourseSchema);

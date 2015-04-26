@@ -1,0 +1,41 @@
+<div class="Schedule" data-ng-init="find()">
+    <div class="round-list-container">
+        <h3> Courses</h3>
+
+        <div class="round-container" data-ng-repeat="course in courses">
+            <div class="round-info">
+                <h4><a ng-href="#/courses/{{course._id}}">{{course.name}}</a></h4>
+            </div>
+        </div>
+
+        <h3> Add a new Course</h3>
+
+        <form name="roundForm" data-ng-submit="create()">
+            <div class="input-wrapper">
+                <input required id="name_block" type="text" name="name" placeholder="Course Name"
+                       ng-model="course.name">
+            </div>
+            <div class="input-wrapper">
+                <input required id="address_block" type="text" name="address" placeholder="Course Address"
+                       ng-model="course.address">
+            </div>
+            <div class="input-wrapper">
+                <input required id="city_block" type="text" name="city" placeholder="City"
+                       ng-model="course.city">
+            </div>
+            <div class="input-wrapper">
+                <input required id="state_block" type="text" name="state" placeholder="State"
+                       ng-model="course.state">
+            </div>
+            <div class="input-wrapper">
+                <input required id="zipcode_block" type="text" name="zipcode" placeholder="Zipcode"
+                       ng-model="course.zipcode">
+            </div>
+
+            <div class="login-button">
+                <button type="submit" class="submit_button btn-default">Submit</button>
+            </div>
+        </form>
+    </div>
+
+</div>
