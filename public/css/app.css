@@ -77,3 +77,10 @@ body {
     display:block;
     float:left;
 }
+
+.content {
+
+    width:90%;
+    margin:auto;
+    margin-top:60px;
+}
