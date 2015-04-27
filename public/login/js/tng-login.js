@@ -3,7 +3,6 @@
 
 var app = angular.module('tng-login', [
     'angular-storage',
-    'auth0',
     'angular-jwt',
     'ui.bootstrap',
     'ui.router'
@@ -37,6 +36,7 @@ var app = angular.module('tng-login', [
             //AUTH OK!
             if(response.token){
                 store.set('token', response.token);
+                $rootScope.$emit('loggedin');
                 checkUserToken();
             }
             $scope.loginError = 0;

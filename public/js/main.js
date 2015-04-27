@@ -3,15 +3,16 @@
 
 var app = angular.module('the-network-golf', [
     'angular-storage',
-    'auth0',
     'angular-jwt',
     'ui.bootstrap',
     'ui.router',
     'network-golf-controllers',
     'ngResource',
+    'snap',
     'tng-login',
     'tng-schedule',
     'tng-courses'
+
 ])
     // Configure Routes for the application
     .config(['$stateProvider', '$urlRouterProvider', '$locationProvider', 'jwtInterceptorProvider', '$httpProvider',

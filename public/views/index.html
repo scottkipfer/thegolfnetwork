@@ -12,8 +12,9 @@
     <script src="lib/angular-bootstrap/ui-bootstrap-tpls.min.js"></script>
     <script src="lib/a0-angular-storage/dist/angular-storage.min.js"></script>
     <script src="lib/angular-ui-router/release/angular-ui-router.min.js"></script>
+    <script src="lib/snapjs/snap.js"></script>
+    <script src="lib/angular-snap/angular-snap.js"></script>
     <script src="lib/angular-jwt/dist/angular-jwt.min.js"></script>
-    <script src="lib/auth0-angular/build/auth0-angular.min.js"></script>
     <script src="login/js/tng-login.js"></script>
     <script src="schedule/js/tng-schedule.js"></script>
     <script src="course/js/tng-courses.js"></script>
@@ -24,24 +25,42 @@
 
     <link href="lib/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet">
     <link href='http://fonts.googleapis.com/css?family=Roboto+Condensed' rel='stylesheet' type='text/css'>
+
+    <link href="lib/angular-snap/angular-snap.css" rel="stylesheet">
     <link href="css/app.css" rel="stylesheet">
     <link href="login/css/login.css" rel="stylesheet">
     <link href="schedule/css/schedule.css" rel="stylesheet">
     <link href="course/css/course.css" rel="stylesheet">
 </head>
 <body ng-controller="MainController">
-<div class="wrapper">
-
-    <div class="navigation" ng-show="loggedin">
-        <div class="navigation-container">
-            <span ng-click="open_menu()" class="glyphicon glyphicon-th-large "></span>
-        </div>
-        <div class ="pop-down-menu" ng-show="menuIsOpen">
-
-        </div>
+<div class="not-logged-in-container" data-ng-show="!loggedin">
+    <div class="wrapper">
+        <!-- ngView -->
+        <div data-ui-view class="view"></div>
     </div>
-    <!-- ngView -->
-    <div data-ui-view class="view"></div>
+</div>
+<div class='loggedin' data-ng-show="loggedin">
+    <ul class="navigation" ng-show="loggedin">
+        <li class="nav-logo">
+            <ng-include src="'img/nlogo.svg'"></ng-include>
+
+        </li>
+        <!--<li class="navigation-container">
+            <span ng-click="open_menu()" class="glyphicon glyphicon-th-large "></span>
+        </li>-->
+    </ul>
+ <snap-drawer>
+ </snap-drawer>
+    <snap-content>
+
+        <div class="wrapper">
+            <!-- ngView -->
+            <div data-ui-view class="view"></div>
+        </div>
+ </snap-content>
+</div>
 
 </body>
 </html>
+
+

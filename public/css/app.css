@@ -1,4 +1,20 @@
+
+@font-face {
+    font-family:"Gotham-Rounded";
+    src: url("Gotham-Rounded-Medium.ttf");
+}
+
 html {
+    display:block;
+    vertical-align: baseline;
+}
+body {
+    display:block;
+    vertical-align: baseline;
+    overflow:auto;
+    }
+
+.not-logged-in-container {
     background: url(background.jpg) no-repeat center center fixed;
     -webkit-background-size: cover;
     -moz-background-size: cover;
@@ -9,12 +25,12 @@ html {
 }
 
 .navigation {
-    width:100%;
+    width: 100%;
+    border-top: 0;
     height: 50px;
     background: black;
-    position: absolute;
-    top:0;
-    left:0;
+    position:fixed;
+    z-index:100;
 }
 
 .glyphicon.glyphicon-th-large {
@@ -37,4 +53,27 @@ html {
     top:50px;
     left:0;
     z-index:1;
+}
+
+.snap-content {
+    background:whitesmoke;
+}
+
+.nav-logo{
+    height:32px;
+    width:30px;
+}
+
+.navigation {
+    background:whitesmoke;
+    padding:10px 20px 10px 20px;
+    width:100%;
+}
+
+
+
+.navigation li {
+    list-style:none;
+    display:block;
+    float:left;
 }

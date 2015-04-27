@@ -1,5 +1,5 @@
 <div class="Schedule" data-ng-init="find()">
-    <div class="round-list-container">
+    <br class="round-list-container">
         <h3> League Schedule</h3>
 
         <div class="round-container" data-ng-repeat="round in league_rounds">
@@ -17,20 +17,21 @@
         </div>
 
         <h3> Add a new round</h3>
+            {{league_round.date}} </br>
+            {{league_round.name}} </br>
+            {{league_round.course}} </br>
 
         <form name="roundForm" data-ng-submit="create()">
-            <div class="input-wrapper">
+            <div class="">
                 <input required id="date_block" type="date" name="date" placeholder="Date" ng-model="league_round.date">
             </div>
-            <div class="input-wrapper">
+            <div class="">
                 <input required id="name_block" type="text" name="name" placeholder="Round Name"
                        ng-model="league_round.name">
             </div>
-            <div class="input-wrapper">
-                <select required ng-model="league_round.course">
-                    <option disabled selected> Select Course</option>
-                    <option data-ng-repeat="course in courses" value="course._id">{{course.name}}</option>
-                </select>
+            <div class="">
+                <input required type="text" name="course" data-ng-model="league_round.course"
+                     typeahead-editable="false" typeahead="course as course.name for course in courses | filter:$viewValue| limitTo:10" >
             </div>
             <div class="login-button">
                 <button type="submit" class="submit_button btn-default">Submit</button>
