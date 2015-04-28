@@ -1,0 +1,13 @@
+<div class ="profile-wrapper" data-ng-init="loadUser()">
+    <div class ="profile-header">
+        <div class="profile-header-picture">
+            <div class="profile-picture">
+                <!--<ng-include src="'user/img/mypic.jpg'"></ng-include>-->
+                <img ng-src="user/img/mypic.jpg">
+            </div>
+        </div>
+        <div class ="profile-header-name">
+            <h3>{{user.fullName}}</h3>
+        </div>
+    </div>
+</div>

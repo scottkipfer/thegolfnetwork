@@ -11,7 +11,8 @@ var app = angular.module('the-network-golf', [
     'snap',
     'tng-login',
     'tng-schedule',
-    'tng-courses'
+    'tng-courses',
+    'tng-user'
 
 ])
     // Configure Routes for the application
@@ -63,6 +64,11 @@ var app = angular.module('the-network-golf', [
                 url:'/courses/:courseId',
                 templateUrl: 'course/views/course-view.html',
                 controller: 'courseController'
+            })
+            .state('user-profile', {
+                url:'/user/me',
+                templateUrl: 'user/views/profile-view.html',
+                controller: 'userController'
             });
 
         jwtInterceptorProvider.tokenGetter = ['store', function(store) {
