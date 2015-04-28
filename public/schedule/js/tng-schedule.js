@@ -17,11 +17,28 @@ var app = angular.module('tng-schedule', [
             }
         });
     }
-]).controller('scheduleController', ['$scope', '$stateParams','$location','LeagueRounds','jwtHelper','store','$state','Courses', function($scope, $stateParams, $location, LeagueRounds, jwtHelper,store,$state,Courses){
+]).controller('scheduleController', ['$scope', '$rootScope', '$stateParams','$location','LeagueRounds','jwtHelper','store','$state','Courses', function($scope, $rootScope, $stateParams, $location, LeagueRounds, jwtHelper,store,$state,Courses){
     $scope.title = "Schedule";
+    $rootScope.$emit('stateChange',{state:$scope.title});
+
+    var updateBreadCrumb = function(){
+        console.log('Current State: ' + $state.current.name);
+      switch($state.current.name){
+            case 'schedule-view':
+                $rootScope.$emit('stateChange',{state:$scope.title});
+                break;
+            case 'league round by id':
+                if($scope.round){
+                    $rootScope.$emit('stateChange',{state:$scope.round.name});
+                }
+                break;
+        }
+    };
+
     $scope.schedules = [];
     $scope.courses = [];
 
+    updateBreadCrumb();
 
     var getCourses = function(){
         Courses.query(function(courses){
@@ -52,8 +69,8 @@ var app = angular.module('tng-schedule', [
         LeagueRounds.get({
             leagueroundId: $stateParams.leagueroundId
         }, function(round){
-            console.log(round);
             $scope.round = round;
+            updateBreadCrumb();
         });
     };
 

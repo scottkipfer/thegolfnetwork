@@ -2,8 +2,12 @@
     font-family: "Gotham-Rounded";
 }
 
-.Schedule h3 {
-    margin-top:0px;
+.Schedule{
+
+    width:90%;
+    min-height:100%;
+    margin:auto;
+    margin-top:50px;
 }
 .round-list-container {
     width:90%;

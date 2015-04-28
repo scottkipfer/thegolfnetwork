@@ -5,7 +5,7 @@ angular.module('network-golf-controllers',[]).controller('golferController', fun
 
 
 }).controller('MainController', function($scope, $rootScope, store, jwtHelper){
-
+    $scope.state = '';
     var checkUserToken = function(){
         var user_token = store.get('token');
         if(user_token){
@@ -26,6 +26,11 @@ angular.module('network-golf-controllers',[]).controller('golferController', fun
     $rootScope.$on('loggedin', function(){
         console.log('logged in!');
         $scope.loggedin = checkUserToken();
+    });
+
+    $rootScope.$on('stateChange',function(event,args){
+        console.log(args.state);
+        $scope.state = args.state;
     });
 
     $scope.open_menu = function(){

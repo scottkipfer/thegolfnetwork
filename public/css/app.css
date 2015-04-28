@@ -5,23 +5,19 @@
 }
 
 html {
-    display:block;
-    vertical-align: baseline;
-}
-body {
-    display:block;
-    vertical-align: baseline;
-    overflow:auto;
-    }
-
-.not-logged-in-container {
     background: url(background.jpg) no-repeat center center fixed;
     -webkit-background-size: cover;
     -moz-background-size: cover;
     -o-background-size: cover;
     background-size: cover;
-
     min-height:100%;
+}
+body {
+
+    }
+
+.not-logged-in-container {
+
 }
 
 .navigation {
@@ -30,6 +26,9 @@ body {
     height: 50px;
     background: black;
     position:fixed;
+    top:0;
+    left:0;
+    right:0;
     z-index:100;
 }
 
@@ -68,18 +67,45 @@ body {
     background:whitesmoke;
     padding:10px 20px 10px 20px;
     width:100%;
+    box-sizing: border-box;
 }
 
 
 
 .navigation li {
     list-style:none;
-    display:block;
+    display:list-item;
     float:left;
+    box-sizing: border-box;
+}
+
+.breadcrum {
+    position:absolute;
+    left:50px;
+    right:50px;
+    text-align: center;
+    vertical-align: baseline;
+    box-sizing: border-box;
+    margin:0;
+    padding:0;
+    border:0;
+}
+
+
+.breadcrum h3{
+    margin:0;
+    padding:0;
+    font-size:18px;
+    position:relative;
+    vertical-align: baseline;
+    text-align:center;
+    white-space:nowrap;
+    line-height:30px;
+    box-sizing: border-box;
+    display:inline-block;
 }
 
 .content {
-
     width:90%;
     margin:auto;
     margin-top:60px;
