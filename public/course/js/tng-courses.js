@@ -73,8 +73,6 @@ var app = angular.module('tng-courses', [
         $scope.create_tee = function() {
 
             this.tee.holes = $scope.holes;
-            console.log(this.tee.holes);
-            console.log('Course ID for adding Tee: '+this.course._id);
 
 
             var tee = new Tees({
@@ -104,10 +102,8 @@ var app = angular.module('tng-courses', [
                 Tees.query({
                     courseId: course._id
                 },function(tees){
-                    console.log(tees);
                     $scope.tees = tees;
                 });
-                console.log(course);
                 $scope.course = course;
             });
         };

@@ -17,7 +17,27 @@ var app = angular.module('tng-schedule', [
             }
         });
     }
-]).controller('scheduleController', ['$scope', '$rootScope', '$stateParams','$location','LeagueRounds','jwtHelper','store','$state','Courses', function($scope, $rootScope, $stateParams, $location, LeagueRounds, jwtHelper,store,$state,Courses){
+]).factory('TeeTimesByRound',['$resource',
+    function($resource) {
+        return $resource('teetime/:leagueroundId', {
+            leagueroundId: '@_id'
+        }, {
+            update: {
+                method: 'PUT'
+            }
+        });
+    }
+]).factory('TeeTimes',['$resource',
+    function($resource) {
+        return $resource('teetime/:teetimeId', {
+            teetimeId: '@_id'
+        }, {
+            update: {
+                method: 'PUT'
+            }
+        });
+    }
+]).controller('scheduleController', ['$scope', '$rootScope', '$stateParams','$location','LeagueRounds','jwtHelper','store','$state','Courses', 'TeeTimes','TeeTimesByRound', function($scope, $rootScope, $stateParams, $location, LeagueRounds, jwtHelper,store,$state,Courses,TeeTimes,TeeTimesByRound){
     $scope.title = "Schedule";
     $rootScope.$emit('stateChange',{state:$scope.title});
 
@@ -45,7 +65,8 @@ var app = angular.module('tng-schedule', [
             $scope.courses = courses;
             console.log("Courses" +$scope.courses);
         })
-    }
+    };
+
     $scope.create = function(){
       var league_round = new LeagueRounds({
           name: this.league_round.name,
@@ -69,6 +90,11 @@ var app = angular.module('tng-schedule', [
         LeagueRounds.get({
             leagueroundId: $stateParams.leagueroundId
         }, function(round){
+            TeeTimesByRound.query({
+                leagueroundId: round._id
+            },function(teetimes){
+               $scope.teetimes = teetimes;
+            });
             $scope.round = round;
             updateBreadCrumb();
         });

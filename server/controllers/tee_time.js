@@ -35,8 +35,7 @@ exports.create = function (req,res) {
 
 // Read Tee Times
 exports.read = function (req, res) {
-    console.log(req);
-  TeeTime.find().sort('time').exec(function(err,tee_times) {
+  TeeTime.find().where('league_round').equals(req.league_round._id).sort('time').exec(function(err,tee_times) {
       if(err){
           return res.status(500).json({
               error: 'Cannot get tee times'
