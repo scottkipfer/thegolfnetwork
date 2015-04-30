@@ -18,6 +18,10 @@ var LeagueRoundSchema = new Schema({
     },
     course: {
         type: String
+    },
+    status: {
+        type: String,
+        default: 'Scheduled'
     }
 });
 

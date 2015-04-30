@@ -7,7 +7,7 @@
     width:90%;
     min-height:100%;
     margin:auto;
-    margin-top:50px;
+    margin-top:60px;
 }
 .round-list-container {
     width:90%;
@@ -58,4 +58,67 @@
 }
 
 .round-info {
+}
+
+.League-Round-Info-Wrapper {
+    margin:auto;
+    width:100%;
+}
+
+.League-Round-Info {
+    margin:auto;
+    width:100%;
+    background:white;
+    box-shadow: 0 2px 0 rgba(0,0,0,0.07);
+    border-radius:5px;
+    margin-bottom: 20px;
+    padding:10px;
+
+}
+
+.Tee-Times {
+    margin:auto;
+    width:100%;
+    background:white;
+    box-shadow: 0 2px 0 rgba(0,0,0,0.07);
+    border-radius:5px;
+    margin-bottom: 20px;
+    padding:10px;
+}
+
+.Tee-Time-Sign-Up {
+    margin:auto;
+    width:100%;
+    background:#ffd466;
+    border-radius:5px;
+    margin-bottom: 20px;
+    box-shadow: 0 2px 0 rgba(0,0,0,0.07);
+    padding:10px;
+    color:#b28000;
+}
+.Tee-Time-Sign-Up button {
+    margin-top:10px;
+    margin-right:10px;
+}
+
+.Cant-Make-It {
+    margin:auto;
+    width:100%;
+    background:#d9534f;
+    border-radius:5px;
+    margin-bottom: 20px;
+    box-shadow: 0 2px 0 rgba(0,0,0,0.07);
+    padding:10px;
+    color:white;
+}
+
+.Signed-Up {
+    margin:auto;
+    width:100%;
+    background:#428bca;
+    border-radius:5px;
+    margin-bottom: 20px;
+    box-shadow: 0 2px 0 rgba(0,0,0,0.07);
+    padding:10px;
+    color:white;
 }

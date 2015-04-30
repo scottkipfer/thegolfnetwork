@@ -1,6 +1,40 @@
 <div class="Schedule" data-ng-init="findOne()">
-    {{round.date}}</br>
-    {{round.course}} </br>
+    <div class="League-Round-Info-Wrapper">
+        <h4>League Round Info </h4>
+        <div class="League-Round-Info">
+            Date: {{round.date| date:'MMMM'}}
+             {{round.date| date:'d'}} </br>
+            Course: <a ng-href="#/courses/{{course._id}}">{{course.name}}</a> </br>
+            Status: {{round.status}}
+        </div>
+    </div>
+    <div class="Tee-Time-Sign-Up">
+        You haven't selected a tee time yet! Please select a tee time below.</br>
+        <div class="btn-group" dropdown is-open="status.isopen">
+            <button type="button" class="btn btn-primary dropdown-toggle" dropdown-toggle>
+                Tee Time <span class="caret"></span>
+            </button>
+            <ul class="dropdown-menu" role="menu">
+                <li><a href="#">Action</a></li>
+                <li><a href="#">Another action</a></li>
+                <li><a href="#">Something else here</a></li>
+                <li class="divider"></li>
+                <li><a href="#">Separated link</a></li>
+            </ul>
+        </div>
+        <button type="button" class="btn btn-danger">I can't make it</button>
+    </div>
+    <div class="Cant-Make-It">
+        Sorry you can't make it this week.
+    </div>
+    <div class="Signed-Up">
+        You're signed up for the 7:15 time slot!
+    </div>
+    <div class="Tee-Times-Wrapper">
+        <h4>Tee Times</h4>
+        <div class="Tee-Times">
+            {{teetimes}}
+        </div>
+    </div>
     {{round}}
-    {{teetimes}}
 </div>

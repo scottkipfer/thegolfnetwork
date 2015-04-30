@@ -2,8 +2,6 @@
 
 var mongoose = require('mongoose');
 var TeeTime = mongoose.model('TeeTime');
-var _ = require('lodash');
-
 
 exports.tee_time = function(req, res, next, id){
     TeeTime.load(id, function(err, tee_time){

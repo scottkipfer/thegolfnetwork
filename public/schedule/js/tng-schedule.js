@@ -95,6 +95,12 @@ var app = angular.module('tng-schedule', [
             },function(teetimes){
                $scope.teetimes = teetimes;
             });
+            Courses.get({
+                courseId: round.course
+            }, function(course){
+                $scope.course = course;
+            });
+
             $scope.round = round;
             updateBreadCrumb();
         });
