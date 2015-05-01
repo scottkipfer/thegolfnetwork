@@ -6,9 +6,14 @@ var TeeTimeSchema = new Schema({
     time:{
         type:Date
     },
-    golfers: {
-        type: Array
-    },
+    golfers: [{
+        _id: String,
+        name: {
+            type:String,
+            default: 'empty'
+        },
+        picture: String
+    }],
     league_round: {
         type: String
     }
@@ -21,5 +26,10 @@ var TeeTimeSchema = new Schema({
 /***************************************************************************************************
  *                                      Pre Save Hooks
  ***************************************************************************************************/
+TeeTimeSchema.statics.load = function(id,cb) {
+    this.findOne({
+        _id:id
+    }).exec(cb);
+};
 
 module.exports = mongoose.model('TeeTime', TeeTimeSchema);

@@ -15,7 +15,23 @@ var createTeeTimes = function(league_round){
         TeeTime_Time.setMinutes(startingTeeTime.getMinutes() + minBetweenTeeTimes);
         var tee_time = new TeeTime({
             time: new Date(TeeTime_Time),
-            golfers:[],
+            golfers:[{
+                _id:'',
+                name:'empty',
+                picture:''
+            },{
+                _id:'',
+                name:'empty',
+                picture:''
+            },{
+                _id:'',
+                name:'empty',
+                picture:''
+            },{
+                _id:'',
+                name:'empty',
+                picture:''
+            }],
             league_round: league_round._id
         });
         tee_time.save(function(err){
@@ -85,12 +101,13 @@ exports.show = function(req,res) {
 // Update Tee Time
 exports.update = function (req,res) {
     var league_round = req.league_round;
-
-    league_round.name = req.body.league_round.name;
-    league_round.date = req.body.league_round.date;
-    league_round.dont_care = req.body.league_round.dont_care;
-    league_round.cant_make_it = req.body.league_round.cant_make_it;
-    league_round.course = req.body.league_round.course;
+    console.log(league_round);
+    league_round.name = req.body.name;
+    league_round.date = req.body.date;
+    league_round.dont_care = req.body.dont_care;
+    league_round.cant_make_it = req.body.cant_make_it;
+    league_round.course = req.body.course;
+    league_round.status = req.body.status;
     league_round.save(function(err){
         if(err){
             return res.status(500).json({

@@ -19,7 +19,7 @@ var app = angular.module('tng-schedule', [
     }
 ]).factory('TeeTimesByRound',['$resource',
     function($resource) {
-        return $resource('teetime/:leagueroundId', {
+        return $resource('teetime-byleague/:leagueroundId', {
             leagueroundId: '@_id'
         }, {
             update: {
@@ -29,7 +29,7 @@ var app = angular.module('tng-schedule', [
     }
 ]).factory('TeeTimes',['$resource',
     function($resource) {
-        return $resource('teetime/:teetimeId', {
+        return $resource('teetime-bytee/:teetimeId', {
             teetimeId: '@_id'
         }, {
             update: {
@@ -40,6 +40,103 @@ var app = angular.module('tng-schedule', [
 ]).controller('scheduleController', ['$scope', '$rootScope', '$stateParams','$location','LeagueRounds','jwtHelper','store','$state','Courses', 'TeeTimes','TeeTimesByRound', function($scope, $rootScope, $stateParams, $location, LeagueRounds, jwtHelper,store,$state,Courses,TeeTimes,TeeTimesByRound){
     $scope.title = "Schedule";
     $rootScope.$emit('stateChange',{state:$scope.title});
+    $scope.user = {};
+    // TODO make service
+    var getUser = function(){
+        var token = store.get('token');
+        if(token){
+            $scope.user = jwtHelper.decodeToken(token).user;
+            console.log('Scope User '+ $scope.user.fullName);
+        }
+    };
+
+    var checkUserForTeeTime = function(round,teetimes){
+        var user = {
+            status: 'pending',
+            teetime : ''
+        };
+        teetimes.forEach(function(tee){
+            tee.golfers.forEach(function(golfer){
+                if(golfer._id === $scope.user._id){
+                    user.status = 'signedup';
+                    user.teetime = tee.time;
+                }
+            });
+        });
+
+        if(user.status === 'pending'){
+            round.cant_make_it.forEach(function(golfer){
+                if(golfer._id === $scope.user._id){}
+                user.status ='cantmakeit';
+            })
+        }
+
+        $scope.user.status = user.status;
+        $scope.user.teetime = user.teetime;
+    };
+    getUser();
+
+    $scope.addToTeeTime = function(teetime){
+       console.log(teetime);
+        var added = false;
+        teetime.golfers.forEach(function(golfer){
+            if(golfer.name === 'empty' && added === false){
+                golfer.name = $scope.user.fullName;
+                golfer._id = $scope.user._id;
+                added = true;
+            }
+        });
+
+        if(added === true){
+            var new_teetime = new TeeTimes(teetime);
+            console.log(new_teetime);
+            new_teetime.$update(function(){
+                $scope.findOne();
+            });
+        } else {
+            // todo display adding to tee time error
+        }
+    };
+
+    $scope.isTeeTimeFull = function(teetime){
+        var isFull = true;
+        teetime.golfers.forEach(function(golfer){
+            if(golfer.name == 'empty'){
+                    isFull = false;
+            }
+        });
+        return isFull;
+    };
+
+    $scope.removeFromTeeTime = function(teetime){
+        teetime.golfers.forEach(function(golfer){
+            if(golfer._id === $scope.user._id){
+                golfer._id = '';
+                golfer.name = 'empty';
+                golfer.picture = '';
+            }
+        });
+
+        teetime.golfers.sort();
+
+        var new_teetime = new TeeTimes(teetime);
+        new_teetime.$update(function(){
+            $scope.findOne();
+        });
+
+    };
+
+    $scope.addToCantMakeItList = function(){
+      $scope.round.cant_make_it.push({
+          name: $scope.user.fullName,
+          _id: $scope.user._id,
+          picture: $scope.user.picture
+      });
+        console.log($scope.round.cant_make_it);
+        $scope.round.$update(function(){
+            $scope.findOne();
+        })
+    };
 
     var updateBreadCrumb = function(){
         console.log('Current State: ' + $state.current.name);
@@ -57,6 +154,9 @@ var app = angular.module('tng-schedule', [
 
     $scope.schedules = [];
     $scope.courses = [];
+
+
+
 
     updateBreadCrumb();
 
@@ -94,13 +194,13 @@ var app = angular.module('tng-schedule', [
                 leagueroundId: round._id
             },function(teetimes){
                $scope.teetimes = teetimes;
+                checkUserForTeeTime(round,teetimes);
             });
             Courses.get({
                 courseId: round.course
             }, function(course){
                 $scope.course = course;
             });
-
             $scope.round = round;
             updateBreadCrumb();
         });

@@ -45,6 +45,7 @@ exports.read = function (req, res) {
 
 // Update Tee Time
 exports.update = function (req,res) {
+    console.log('WE GET HERE' + req);
     var tee_time = req.tee_time;
 
     tee_time.time = req.body.time;

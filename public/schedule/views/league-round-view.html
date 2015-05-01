@@ -8,33 +8,60 @@
             Status: {{round.status}}
         </div>
     </div>
-    <div class="Tee-Time-Sign-Up">
+    <div class="Tee-Time-Sign-Up" ng-show="user.status === 'pending'">
         You haven't selected a tee time yet! Please select a tee time below.</br>
         <div class="btn-group" dropdown is-open="status.isopen">
-            <button type="button" class="btn btn-primary dropdown-toggle" dropdown-toggle>
+            <button type="button" class="btn btn-primary dropdown-toggle" data-toggle="dropdown">
                 Tee Time <span class="caret"></span>
             </button>
             <ul class="dropdown-menu" role="menu">
-                <li><a href="#">Action</a></li>
-                <li><a href="#">Another action</a></li>
-                <li><a href="#">Something else here</a></li>
-                <li class="divider"></li>
-                <li><a href="#">Separated link</a></li>
+                <li ng-click="addToTeeTime(tee)" ng-show="!isTeeTimeFull(tee)" ng-repeat="tee in teetimes"><a class="singupdropdownlink">{{tee.time|date:'h:mm a'}}</a></li>
             </ul>
         </div>
-        <button type="button" class="btn btn-danger">I can't make it</button>
+        <button type="button" ng-click="addToCantMakeItList()" class="btn btn-danger">I can't make it</button>
     </div>
-    <div class="Cant-Make-It">
+    <div class="Cant-Make-It" ng-show="user.status === 'cantmakeit'">
         Sorry you can't make it this week.
     </div>
-    <div class="Signed-Up">
-        You're signed up for the 7:15 time slot!
+    <div class="Signed-Up" ng-show="user.status === 'signedup'">
+        You're signed up for the {{user.teetime|date:'h:mm a'}} time slot!
     </div>
     <div class="Tee-Times-Wrapper">
         <h4>Tee Times</h4>
-        <div class="Tee-Times">
-            {{teetimes}}
+        <div class="Tee-Times" data-ng-repeat="tee in teetimes">
+            <h5>{{tee.time|date:'h:mm a'}}</h5>
+            <div data-ng-repeat="golfer in tee.golfers">
+                <div ng-show="golfer.name != 'empty' && golfer._id !== user._id">
+                    <a ng-href="#/user/{{golfer._id}}">
+                        {{golfer.name}}</a></br>
+                </div>
+                <div ng-show="golfer._id === user._id">
+                    <a ng-href="#/user/me">
+                        {{golfer.name}}</a>  <a class='removefromteetime-link'ng-click="removeFromTeeTime(tee)">x</a></br>
+                </div>
+                <div ng-show="golfer.name === 'empty'">
+                    {{golfer.name}}</br>
+                </div>
+
+            </div>
         </div>
     </div>
-    {{round}}
+    <div class="Tee-Times-Wrapper">
+        <h4>Can't Make It List</h4>
+        <div class="Cant-Make-It-List">
+            <div ng-repeat="golfer in round.cant_make_it">
+                <div ng-show="golfer._id === user._id">
+                    <a ng-href="#/user/me">{{golfer.name}}</a>
+                    <a class='removefromteetime-link'ng-click="removeFromTeeTime(tee)">x</a></br>
+                </div>
+                <div ng-show="golfer._id !== user._id">
+                    <a ng-href="#/user/{{golfer._id}}">{{golfer.name}}</a>
+                    <a class='removefromteetime-link'ng-click="removeFromTeeTime(tee)">x</a></br>
+                </div>
+                {{golfer}}
+            </div>
+        </div>
+        {{round}}
+    </div>
+
 </div>

@@ -13,9 +13,11 @@ var LeagueRoundSchema = new Schema({
     cant_make_it: {
         type: Array
     },
-    dont_care: {
-        type: Array
-    },
+    dont_care: [{
+        _id: String,
+        name: String,
+        picture: String
+    }],
     course: {
         type: String
     },
