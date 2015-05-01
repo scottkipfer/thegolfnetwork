@@ -29,9 +29,11 @@ exports.signup = function(req, res, next) {
     if(!req.user){
         var user = new User(req.body);
         var message = null;
-
+        console.log(user);
         user.save(function(err) {
             if(err) {
+
+                console.log(err);
                 message = getErrorMessage(err);
                 //req.flash('error', message);
                 return res.redirect('#/signup');
@@ -40,6 +42,8 @@ exports.signup = function(req, res, next) {
             req.login(user, function(err) {
                 console.log(user);
                 if(err){
+                    console.log('LOGIN ERROR');
+                    console.log(err);
                     return next(err);
                 }
                 return res.redirect('#/league-schedule');

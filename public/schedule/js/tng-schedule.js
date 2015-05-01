@@ -66,9 +66,10 @@ var app = angular.module('tng-schedule', [
 
         if(user.status === 'pending'){
             round.cant_make_it.forEach(function(golfer){
-                if(golfer._id === $scope.user._id){}
-                user.status ='cantmakeit';
-            })
+                if(golfer._id === $scope.user._id){
+                    user.status ='cantmakeit';
+                }
+            });
         }
 
         $scope.user.status = user.status;
