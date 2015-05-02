@@ -117,14 +117,30 @@ var app = angular.module('tng-schedule', [
                 golfer.picture = '';
             }
         });
-
         teetime.golfers.sort();
-
         var new_teetime = new TeeTimes(teetime);
         new_teetime.$update(function(){
             $scope.findOne();
         });
 
+    };
+
+    $scope.removeFromCantMakeIt = function(golfer_id){
+        var index = -1;
+        for(var i = 0, len = $scope.round.cant_make_it.length; i < len; i++){
+            if($scope.round.cant_make_it[i]._id === golfer_id){
+                index = i;
+                break;
+            }
+        }
+        if(index !== -1){
+            console.log('here!');
+            $scope.round.cant_make_it.splice(index,1);
+        }
+        var new_round = new LeagueRounds($scope.round);
+        new_round.$update(function(){
+            $scope.findOne();
+        });
     };
 
     $scope.addToCantMakeItList = function(){

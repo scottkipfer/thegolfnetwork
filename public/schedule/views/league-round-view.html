@@ -52,7 +52,7 @@
             <div ng-repeat="golfer in round.cant_make_it">
                 <div ng-show="golfer._id === user._id">
                     <a ng-href="#/user/me">{{golfer.name}}</a>
-                    <a class='removefromteetime-link'ng-click="removeFromTeeTime(tee)">x</a></br>
+                    <a class='removefromteetime-link'ng-click="removeFromCantMakeIt(golfer._id)">x</a></br>
                 </div>
                 <div ng-show="golfer._id !== user._id">
                     <a ng-href="#/user/{{golfer._id}}">{{golfer.name}}</a>
