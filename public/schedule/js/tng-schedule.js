@@ -41,6 +41,7 @@ var app = angular.module('tng-schedule', [
     $scope.title = "Schedule";
     $rootScope.$emit('stateChange',{state:$scope.title});
     $scope.user = {};
+
     // TODO make service
     var getUser = function(){
         var token = store.get('token');
