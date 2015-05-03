@@ -93,6 +93,9 @@ var app = angular.module('tng-schedule', [
             console.log(new_teetime);
             new_teetime.$update(function(){
                 $scope.findOne();
+            },function(){
+                $scope.findOne();
+                // todo display error
             });
         } else {
             // todo display adding to tee time error
@@ -211,6 +214,7 @@ var app = angular.module('tng-schedule', [
                 leagueroundId: round._id
             },function(teetimes){
                $scope.teetimes = teetimes;
+                console.log($scope.teetimes);
                 checkUserForTeeTime(round,teetimes);
             });
             Courses.get({
