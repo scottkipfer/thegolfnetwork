@@ -7,7 +7,7 @@ var TeeTime = mongoose.model('TeeTime');
 var createTeeTimes = function(league_round){
     var numberOfTeeTimes = 8;
     var minBetweenTeeTimes =10;
-    var startingTeeTime = new Date(1988,6,28,17,5,0,0);
+    var startingTeeTime = new Date(Date.UTC(1988,6,28,21,5,0,0));
     var TeeTime_Time = startingTeeTime;
     var i;
 
