@@ -26,5 +26,8 @@ module.exports = function(app) {
     app.route('/users/me')
         .get(users.me);
 
+    app.route('/users/:userId')
+        .get(users.me);
+
     app.param('userId',users.user);
 };

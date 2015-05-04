@@ -70,6 +70,7 @@ exports.signout = function(req, res) {
 };
 
 exports.user = function(req,res,next,id){
+    console.log(id);
     User.findOne({
         _id: id
     }).exec(function(err,user) {
@@ -79,7 +80,10 @@ exports.user = function(req,res,next,id){
         if(!user){
             return next(new Error('Failed to load user: ' +id));
         }
-        req.profile = user;
+        user.hashed_password = null;
+        user.salt = null;
+
+        req.user = user;
         next();
     });
 };

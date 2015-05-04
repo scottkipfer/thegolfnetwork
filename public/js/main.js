@@ -69,6 +69,11 @@ var app = angular.module('the-network-golf', [
                 url:'/user/me',
                 templateUrl: 'user/views/profile-view.html',
                 controller: 'userController'
+            })
+            .state('users-profile', {
+                url:'/users/:userId',
+                templateUrl:'user/views/profile-view.html',
+                controller: 'profileController'
             });
 
         jwtInterceptorProvider.tokenGetter = ['store', function(store) {

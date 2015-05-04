@@ -32,7 +32,7 @@
             <h5>{{tee.time|date:'h:mm a'}}</h5>
             <div data-ng-repeat="golfer in tee.golfers">
                 <div ng-show="golfer.name != 'empty' && golfer._id !== user._id">
-                    <a ng-href="#/user/{{golfer._id}}">
+                    <a ng-href="#/users/{{golfer._id}}">
                         {{golfer.name}}</a></br>
                 </div>
                 <div ng-show="golfer._id === user._id">
@@ -55,7 +55,7 @@
                     <a class='removefromteetime-link'ng-click="removeFromCantMakeIt(golfer._id)">x</a></br>
                 </div>
                 <div ng-show="golfer._id !== user._id">
-                    <a ng-href="#/user/{{golfer._id}}">{{golfer.name}}</a>
+                    <a ng-href="#/users/{{golfer._id}}">{{golfer.name}}</a>
                 </div>
             </div>
         </div>
