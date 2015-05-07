@@ -7,13 +7,12 @@
     <meta charset="utf-8"/>
     <meta content='width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0' name='viewport'/>
     <!--<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.3.14/angular.min.js"></script>-->
+
     <script src="lib/angular/angular.js"></script>
     <script src="lib/angular-resource/angular-resource.js"></script>
     <script src="lib/angular-bootstrap/ui-bootstrap-tpls.min.js"></script>
     <script src="lib/a0-angular-storage/dist/angular-storage.min.js"></script>
     <script src="lib/angular-ui-router/release/angular-ui-router.min.js"></script>
-    <script src="lib/snapjs/snap.js"></script>
-    <script src="lib/angular-snap/angular-snap.js"></script>
     <script src="lib/angular-jwt/dist/angular-jwt.min.js"></script>
     <script src="login/js/tng-login.js"></script>
     <script src="user/js/tng-user.js"></script>
@@ -24,6 +23,10 @@
     <script src="js/directives.js"></script>
     <script src="js/main.js"></script>
 
+    <script src="lib/jquery/dist/jquery.min.js"></script>
+    <script src="lib/scotch-panels/dist/scotchPanels.min.js"></script>
+
+
     <link href="lib/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet">
     <link href='http://fonts.googleapis.com/css?family=Roboto+Condensed' rel='stylesheet' type='text/css'>
 
@@ -32,24 +35,112 @@
     <link href="login/css/login.css" rel="stylesheet">
     <link href="schedule/css/schedule.css" rel="stylesheet">
     <link href="course/css/course.css" rel="stylesheet">
+
+    <link href="css/panel.css" rel="stylesheet">
+
 </head>
 <body ng-controller="MainController">
-<ul class="navigation" ng-show="loggedin">
-    <li class="nav-logo">
-        <ng-include src="'img/nlogo.svg'"></ng-include>
-    </li>
-    <li class="breadcrum">
-        <h3>{{state}}</h3>
-    </li>
-
-    <!--<li class="navigation-container">
-        <span ng-click="open_menu()" class="glyphicon glyphicon-th-large "></span>
-    </li>-->
-</ul>
-    <div class="wrapper">
-        <!-- ngView -->
-        <div data-ui-view class="view"></div>
+<!--<header ng-show="loggedin">
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-md-12">
+                <span class="nav-logo">
+                        <ng-include src="'img/nlogo.svg'"></ng-include>
+                </span>
+                <span  class="logo">{{state}}</span>
+                <a href="#" class="toggle-panel"><i class="fa fa-bars"></i></a>
+            </div>
+        </div>
     </div>
+</header>-->
+<header>
+
+    <ul class="navigation" id="header" ng-show="loggedin">
+        <li class="nav-logo">
+            <ng-include src="'img/nlogo.svg'"></ng-include>
+        </li>
+        <li class="breadcrum">
+            <h3>{{state}}</h3>
+        </li>
+        <li class ="menu-toggle">
+            <a class="menu-trigger toggle-panel">open</a>
+        </li>
+    </ul>
+</header>
+<div id="site-wrapper">
+    <div id="scotch-panel"><!-- Left blank on purpose --></div>
+        <div class="wrapper">
+            <!-- ngView-->
+            <div data-ui-view class="view"></div>
+        </div>
+</div>
+
+<div id="fixed-nav" class="dont-show" ng-show="loggedin">
+    <ul>
+        <li><a href="#">Home</a></li>
+        <li><a href="#">About</a></li>
+        <li><a href="#">Services</a></li>
+        <li><a href="#">Contact</a></li>
+    </ul>
+</div>
+
+<script>
+    $(function() {
+
+    $('#scotch-panel').scotchPanel({
+    containerSelector: '#site-wrapper',
+    direction: 'right',
+    duration: 300,
+    transition: 'ease',
+    clickSelector: '.toggle-panel',
+    distanceX: '70%',
+    enableEscapeKey: true,
+
+    beforePanelOpen: function() {
+        $('#fixed-nav').removeClass('dont-show');
+        $('fixed-nav').css({'background':'#444',
+        'position': 'fixed',
+        'height': '100%',
+        'top':' 0',
+        'right': '0',
+        'width': '70%'});
+    $('header').css({
+    '-moz-transform': 'translate3d(-70%, 0, 0)',
+    '-ms-transform': 'translate3d(-70%, 0, 0)',
+    '-o-transform': 'translate3d(-70%, 0, 0)',
+    '-webkit-transform': 'translate3d(-70%, 0, 0)',
+    'transform': 'translate3d(-70%, 0, 0)'
+    });
+    },
+    beforePanelClose: function() {
+        $('#fixed-nav').addClass('dont-show');
+        $('header').css({
+            '-moz-transform': 'translate3d(0, 0, 0)',
+            '-ms-transform': 'translate3d(0, 0, 0)',
+            '-o-transform': 'translate3d(0, 0, 0)',
+            '-webkit-transform': 'translate3d(0, 0, 0)',
+            'transform': 'translate3d(0, 0, 0)'
+        });
+        }
+    });
+
+    });
+
+    $(window).scroll(function() {
+        if ($(this).scrollTop() == 0) {
+            $('#header').css({
+                'box-shadow': 'none',
+                '-moz-box-shadow' : 'none',
+                '-webkit-box-shadow' : 'none' });
+        }
+        else {
+            $('#header').css({
+                'box-shadow': '0 -4px 0px 4px #edeff0,0 2px 4px 0 rgba(0,0,0,0.2)',
+                '-moz-box-shadow' : '0 -4px 0px 4px #edeff0,0 2px 4px 0 rgba(0,0,0,0.2)',
+                '-webkit-box-shadow' : '0 -4px 0px 4px #edeff0,0 2px 4px 0 rgba(0,0,0,0.2)' });
+        }
+    });
+</script>
 </body>
 </html>
 

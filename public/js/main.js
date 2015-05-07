@@ -8,7 +8,6 @@ var app = angular.module('the-network-golf', [
     'ui.router',
     'network-golf-controllers',
     'ngResource',
-    'snap',
     'tng-login',
     'tng-schedule',
     'tng-courses',

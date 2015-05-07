@@ -1,0 +1,108 @@
+/*==================================
+=            SITE STUFF            =
+==================================*/
+a {
+    text-decoration: none !important;
+    -webkit-transition: all 225ms ease;
+    -moz-transition: all 225ms ease;
+    transition: all 225ms ease;
+}
+header {
+
+    -webkit-transition: all 300ms ease;
+    -moz-transition: all 300ms ease;
+    transition: all 300ms ease;
+
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    z-index: 99999999;
+    background: ghostwhite;
+    height: 50px;
+}
+header a {
+    color: #777;
+}
+header a:hover {
+    color: #fff;
+}
+header .logo {
+    display: inline-block;
+    height: 50px;
+    line-height: 50px;
+}
+header .toggle-panel {
+    position: absolute;
+    top: 0;
+    right: 0;
+    font-size: 25px;
+    width: 50px;
+    height: 50px;
+    margin-top:-10px;
+    line-height: 50px;
+    text-align: center;
+    background: #333;
+}
+article {
+    height: 1000px;
+}
+
+
+
+
+/*====================================
+=            PANEL STYLES            =
+====================================*/
+#scotch-panel {
+    display: none;
+}
+#site-wrapper {
+    background:whitesmoke;
+}
+#site-wrapper .scotch-panel-canvas {
+    z-index: 99999;
+    background:whitesmoke;
+}
+#fixed-nav {
+    background: #444;
+    position: fixed;
+    height: 100%;
+    top: 0;
+    right: 0;
+    width: 70%;
+    /* padding-top: 50px; */
+}
+#fixed-nav ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    text-align: center;
+}
+#fixed-nav ul li a {
+    display: block;
+    width: 100%;
+    height: 50px;
+    line-height: 50px;
+    background: transparent;
+    color: #fff;
+}
+#fixed-nav ul li a:hover {
+    background: #555;
+}
+article {
+    background: #fff;
+}
+
+.wrapper{
+    background:whitesmoke;
+    width:100%;
+    margin:auto;
+    padding-top:20px;
+    margin-top:-10px;
+    min-height:900px;
+}
+
+.dont-show {
+    display:none;
+}
