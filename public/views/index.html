@@ -54,7 +54,6 @@
     </div>
 </header>-->
 <header>
-
     <ul class="navigation" id="header" ng-show="loggedin">
         <li class="nav-logo">
             <ng-include src="'img/nlogo.svg'"></ng-include>
@@ -135,9 +134,12 @@
         }
         else {
             $('#header').css({
-                'box-shadow': '0 -4px 0px 4px #edeff0,0 2px 4px 0 rgba(0,0,0,0.2)',
+               /* 'box-shadow': '0 -4px 0px 4px #edeff0,0 2px 4px 0 rgba(0,0,0,0.2)',
                 '-moz-box-shadow' : '0 -4px 0px 4px #edeff0,0 2px 4px 0 rgba(0,0,0,0.2)',
-                '-webkit-box-shadow' : '0 -4px 0px 4px #edeff0,0 2px 4px 0 rgba(0,0,0,0.2)' });
+                '-webkit-box-shadow' : '0 -4px 0px 4px #edeff0,0 2px 4px 0 rgba(0,0,0,0.2)' });*/
+                'box-shadow': '0 -4px 0px 4px #edeff0,0 2px 4px  -4px rgba(0,0,0,0.2)',
+                '-moz-box-shadow' : '0 -4px 0px 4px #edeff0,0 2px 4px 0 rgba(0,0,0,0.2)',
+                '-webkit-box-shadow' : '0 -4px 4px -2px #edeff0,0 2px 4px -2px rgba(0,0,0,0.2)' });
         }
     });
 </script>
