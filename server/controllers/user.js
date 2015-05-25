@@ -40,7 +40,7 @@ exports.signup = function(req, res, next) {
             }
 
             req.login(user, function(err) {
-                console.log(user);
+                console.log('here');
                 if(err){
                     console.log('LOGIN ERROR');
                     console.log(err);
