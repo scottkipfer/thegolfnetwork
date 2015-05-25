@@ -60,7 +60,6 @@ exports.league_round = function(req, res, next, id){
 
 // Create League Round
 exports.create = function (req,res) {
-    console.log(req.body);
     var league_round = new LeagueRound(req.body);
     league_round.save(function(err) {
         if (err) {
@@ -87,7 +86,7 @@ exports.read = function (req, res) {
         if(err){
             return res.status(500).json({
                 error: 'Cannot get tee times'
-            })
+            });
         }
         res.json(league_round);
     });
@@ -101,7 +100,6 @@ exports.show = function(req,res) {
 // Update Tee Time
 exports.update = function (req,res) {
     var league_round = req.league_round;
-    console.log(league_round);
     league_round.name = req.body.name;
     league_round.date = req.body.date;
     league_round.dont_care = req.body.dont_care;

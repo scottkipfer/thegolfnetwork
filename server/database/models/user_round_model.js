@@ -31,6 +31,9 @@ var UserRoundSchema = new Schema({
     gross_score: {
         type: Number
     },
+    handicap_diff: {
+      type: Number
+    },
     tee: {
         teeId: String,
         name: String,
@@ -157,6 +160,11 @@ UserRoundSchema.pre('save', function(next){
     this.gross_score = grossScore;
     this.net_score = netScore;
 
+    if(this.status === 'Approved'){
+        this.handicap_diff = Math.round(((this.gross_score - this.tee.rating) * (113/this.tee.slope))*10)/10;
+    } else {
+        this.handicap_diff = null;
+    }
     next();
 });
 
