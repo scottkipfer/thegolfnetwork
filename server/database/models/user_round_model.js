@@ -25,6 +25,12 @@ var UserRoundSchema = new Schema({
     course: {
         type: String
     },
+    net_score: {
+        type: Number
+    },
+    gross_score: {
+        type: Number
+    },
     tee: {
         teeId: String,
         name: String,
@@ -120,9 +126,45 @@ UserRoundSchema.virtual('putts').get(function() {
     return putts;
 });
 
+UserRoundSchema.virtual('saves').get(function() {
+    var saves = 0;
+    this.scorecard.forEach(function(score){
+        if( (score.score === score.par) && (score.putts === 1 || score.putts === 0)){
+            saves++;
+        }
+
+    });
+    return saves;
+});
+
 /***************************************************************************************************
  *                                      Pre Save Hooks
  ***************************************************************************************************/
+UserRoundSchema.pre('save', function(next){
+    var handicap = 0;
+    var grossScore = 0;
+    var netScore;
+
+    if(this.handicap && this.tee.slope){
+        handicap = Math.round((this.tee.slope / 113) * this.handicap);
+    }
+
+    this.scorecard.forEach(function(score){
+        grossScore += score.score;
+    });
+
+    netScore = grossScore - handicap;
+    this.gross_score = grossScore;
+    this.net_score = netScore;
+
+    next();
+});
+
+UserRoundSchema.statics.load = function(id,cb) {
+    this.findOne({
+        _id:id
+    }).exec(cb);
+};
 
 UserRoundSchema.set('toJSON', {
     getters: true,
