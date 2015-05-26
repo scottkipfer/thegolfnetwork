@@ -11,5 +11,6 @@ module.exports = function(app) {
         .get(league_round.show)
         .put(league_round.update)
         .delete(league_round.delete);
+
     app.param('leagueroundId', league_round.league_round);
 };
